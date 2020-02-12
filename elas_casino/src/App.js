@@ -1,6 +1,5 @@
 import React from "react";
-
-import Anu from "./Anu";
+import Ligia from "./component/Ligia";
 
 class App extends React.Component {
   render() {
