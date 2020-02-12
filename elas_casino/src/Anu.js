@@ -1,8 +1,8 @@
 import React from "react";
-
 import axios from "axios";
 let myTimeoutFuncPlayer_1 = "";
 let myTimeoutFuncPlayer_2 = "";
+
 class Anu extends React.Component {
   constructor(props) {
     super(props);
@@ -127,11 +127,7 @@ class Anu extends React.Component {
       }
     }
   }
-  // isTheSame() {
-  //   if (this.state.player1.value === this.state.player2.value) return 1;
-  //   return 0;
-  // }
-
+ 
   isNoWinner() {
     if (this.state.player_1_remaining === 0) {
       console.log("player2 won!");
