@@ -1,5 +1,4 @@
 import React from "react";
-
 import axios from "axios";
 let myTimeoutFuncPlayer_1 = "";
 let myTimeoutFuncPlayer_2 = "";
@@ -7,11 +6,14 @@ class Anu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      player_turn: 1,
       deck_id: "vrfriyi10m9c",
       player_1_remaining: "",
       player_2_remaining: "",
+      dump_pile_remaining: "",
       player1: [],
-      player2: []
+      player2: [],
+      dump_pile: []
     };
     this.shuffleOnClick = this.shuffleOnClick.bind(this);
     this.drawOnClick = this.drawOnClick.bind(this);
@@ -82,8 +84,10 @@ class Anu extends React.Component {
         this.setState({ player_2_remaining: data.piles.player_2.remaining });
       });
   }
+
   drawPlayer_1() {
     clearTimeout(myTimeoutFuncPlayer_1);
+
     if (this.isNoWinner()) {
       axios
         .get(
@@ -91,14 +95,30 @@ class Anu extends React.Component {
         )
         .then(response => response.data)
         .then(data => {
-          console.log(data);
-          console.log(`${data.cards[0].suit} ${data.cards[0].value}`);
+          console.log(
+            `${data.cards[0].suit} ${data.cards[0].value} ${data.cards[0].code}`
+          );
 
           this.setState({
             player1: data.cards[0],
             player_1_remaining: data.piles.player_1.remaining
           });
         });
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dump_pile/add/?cards=${this.state.player1.code}`
+        )
+        .then(response => response.data)
+        .then(data => {
+          this.setState({
+            dump_pile_remaining: data.piles.dump_pile.remaining,
+            player_1_remaining: data.piles.player_1.remaining
+          });
+        });
+      console.log(
+        "into the dump from player1 no: " + this.state.dump_pile_remaining
+      );
+
       if (this.state.player_2_remaining !== 0) {
         myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 4000);
       }
@@ -106,6 +126,7 @@ class Anu extends React.Component {
   }
   drawPlayer_2() {
     clearTimeout(myTimeoutFuncPlayer_2);
+
     if (this.isNoWinner()) {
       axios
         .get(
@@ -114,14 +135,29 @@ class Anu extends React.Component {
         .then(response => response.data)
         .then(data => {
           console.log(data);
-          console.log(`${data.cards[0].suit} ${data.cards[0].value}`);
+          console.log(
+            `${data.cards[0].suit} ${data.cards[0].value} ${data.cards[0].code}`
+          );
 
           this.setState({
             player2: data.cards[0],
             player_2_remaining: data.piles.player_2.remaining
           });
         });
-
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dump_pile/add/?cards=${this.state.player2.code}`
+        )
+        .then(response => response.data)
+        .then(data => {
+          this.setState({
+            dump_pile_remaining: data.piles.dump_pile.remaining,
+            player_2_remaining: data.piles.player_2.remaining
+          });
+        });
+      console.log(
+        "into the dump from player1 no: " + this.state.dump_pile_remaining
+      );
       if (this.state.player_1_remaining !== 0) {
         myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 4000);
       }
@@ -152,18 +188,25 @@ class Anu extends React.Component {
         <button onClick={this.drawOnClick}>Draw cards</button>
         <button onClick={this.drawPlayer_1}>Player-1 draw card</button>
         <button onClick={this.drawPlayer_2}>Player-2 draw card</button>
-        {/* {!this.state.player1 ? (
-          this.isTheSame() ? (
-            <p>Snap it is!!</p>
-          ) : (
-            <p>Draw Again</p>
-          )
-        ) : (
-          <p></p>
-        )} */}
       </main>
     );
   }
 }
 
 export default Anu;
+
+// import React from "react";
+// import Anu from "./Anu";
+// // import Home from "./component/Home";
+
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <main>
+//         {/* <Home /> */}
+//         <Anu />
+//       </main>
+//     );
+//   }
+// }
+// export default App;
