@@ -12,14 +12,15 @@ class Ligia extends Component {
       player_2_remaining: "",
       player1: [],
       player2: [],
-      dumpPile: []
+      dumppile: [],
+      WhosTurn: 0
     };
     this.shuffleOnClick = this.shuffleOnClick.bind(this);
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
     this.drawPlayer_2 = this.drawPlayer_2.bind(this);
-    this.dumpPile = this.dumpPile.bind(this);
-    this.mustSnap = this.mustSnap.bind(this);
+    this.mustSnap_1 = this.mustSnap_1.bind(this);
+    this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
   }
   shuffleOnClick() {
@@ -61,7 +62,7 @@ class Ligia extends Component {
         this.setPlayer2Pile(tempCards);
       });
 
-    myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 2000);
+    myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 4000);
   }
 
   setPlayer1Pile(codes) {
@@ -87,6 +88,7 @@ class Ligia extends Component {
 
   drawPlayer_1() {
     clearTimeout(myTimeoutFuncPlayer_1);
+    this.setState({ WhosTurn: 1 });
     if (this.isNoWinner()) {
       axios
         .get(
@@ -101,13 +103,24 @@ class Ligia extends Component {
             player_1_remaining: data.piles.player_1.remaining
           });
         });
+
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player1.code} `
+        )
+        .then(response =>
+          this.setState({ dumppile: response.data.piles.dumppile.remaining })
+        );
+
       if (this.state.player_2_remaining !== 0) {
-        myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 2000);
-      }}
+        myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 4000);
+      }
+    }
   }
-  
+
   drawPlayer_2() {
     clearTimeout(myTimeoutFuncPlayer_2);
+    this.setState({ WhosTurn: 2 });
     if (this.isNoWinner()) {
       axios
         .get(
@@ -124,12 +137,19 @@ class Ligia extends Component {
           });
         });
 
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player2.code} `
+        )
+        .then(response =>
+          this.setState({ dumppile: response.data.piles.dumppile.remaining })
+        );
+
       if (this.state.player_1_remaining !== 0) {
-        myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 2000);
+        myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 4000);
       }
     }
   }
- 
 
   isNoWinner() {
     if (this.state.player_1_remaining === 0) {
@@ -141,24 +161,68 @@ class Ligia extends Component {
     } else return 1;
   }
 
-  mustSnap() {
-    axios
+  mustSnap_1() {
+    let listOfDumppile = [];
+   axios
       .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${this.state.player1.code},${this.state.player2.code}`
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
+      )
+
+      .then(
+        response => {
+          response.data.cards.forEach(element => {
+            listOfDumppile.push(element.code);
+          });
+        },
+
+        console.log(listOfDumppile)
+      ); 
+
+    //draw
+ /*    axios
+      .get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/draw/?cards=${code}
+        `
       )
       .then(response => {
-        console.log("equal");
+        console.log("I am here drawing");
+        console.log(response.data);
+      });
+    //add */
+    axios
+      .get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${listOfDumppile}`
+      )
+      .then(response => {
+        console.log("I am now adding");
+        console.log(response.data);
       });
   }
 
-  dumpPile() {
-    axios
-      .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player1.code},${this.state.player2.code} `
-      )
-      .then(response =>
-        this.setState({ dumpile: response.data.piles.dumppile.remaining })
-      );
+  mustSnap_2() {
+    if (this.state.player1.value === this.state.player2.value) {
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
+        )
+        .then(response => {
+          let lsitOfDumppile = [];
+          response.data.piles.dumppile.cards.forEach(element =>
+            lsitOfDumppile.push(element.code)
+          );
+        });
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_2/add/?cards=${this.lsitOfDumppile}`
+        )
+        .then(response =>
+          this.setState({
+            player_2_remaining: response.data.piles.player_2.remaining
+          })
+        );
+    } else {
+      console.log("notequal");
+    }
   }
 
   render() {
@@ -172,18 +236,11 @@ class Ligia extends Component {
         <button onClick={this.drawOnClick}>Draw cards</button>
         <button onClick={this.drawPlayer_1}>Player-1 draw card</button>
         <button onClick={this.drawPlayer_2}>Player-2 draw card</button>
-        <button
-          onClick={
-            this.state.player1.value === this.state.player2.value
-              ? this.mustSnap
-              : this.dumpPile
-          }
-        >
-          Snap
-        </button>
+        <button onClick={this.mustSnap_1}>Snap</button>
+        <button onClick={this.mustSnap_2}>Snap</button>
 
         <img src={this.state.player1.image} alt="" />
-        <img src={this.state.player2.image} alt="" /> 
+        <img src={this.state.player2.image} alt="" />
       </main>
     );
   }
