@@ -1,11 +1,14 @@
 import React from 'react'
-
+import "./GameTable.scss"
+import GameLogic from "./GameLogic"
 
 function GameTable(){
 return(
-<div>
-    
-</div>
+<main>
+  <div className="table">
+   <GameLogic/>
+  </div>  
+</main>
 )
 }
 

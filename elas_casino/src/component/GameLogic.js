@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import "./GameTable.scss"
 let myTimeoutFuncPlayer_1 = "";
 let myTimeoutFuncPlayer_2 = "";
 let myTimeoutSnapButton = "";
 
-class Ligia extends Component {
+class GameLogic extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +17,6 @@ class Ligia extends Component {
       dumppile: [],
       WhosTurn: 1
     };
-    this.shuffleOnClick = this.shuffleOnClick.bind(this);
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
     this.drawPlayer_2 = this.drawPlayer_2.bind(this);
@@ -24,8 +24,8 @@ class Ligia extends Component {
     this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
   }
-  shuffleOnClick() {
-    axios
+  componentDidMount(){
+     axios
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
       .then(data => {
@@ -230,17 +230,15 @@ class Ligia extends Component {
 
   render() {
     return (
-      <main>
-        <header>
-          <h1>Lets play Snap!!</h1>
-          <p>click on the button to get your cards</p>
-        </header>
-        <button onClick={this.shuffleOnClick}>Shuffle the deck</button>
-        <button onClick={this.drawOnClick}>Draw cards</button>
-        <button onClick={this.drawPlayer_1}>Player-1 draw card</button>
-        <button onClick={this.drawPlayer_2}>Player-2 draw card</button>
-        <button onClick={this.mustSnap_1}>Snap</button>
-        <button onClick={this.mustSnap_2}>COMPUTER</button>
+      <main >
+         <div className="container1">
+        <button onClick={this.drawOnClick}>Start the Game</button>
+        <button onClick={this.componentDidMount} className="Restart">Restart</button>
+        </div>
+        {<div className="container2">
+        <button onClick={this.mustSnap_1} className="snap">Snap</button>
+        <button className="snap">Snap</button>
+        </div>}
 
         <img src={this.state.player1.image} alt="" />
         <img src={this.state.player2.image} alt="" />
@@ -249,14 +247,6 @@ class Ligia extends Component {
   }
 }
 
-export default Ligia;
+export default GameLogic;
 
-/* {!this.state.player1 ? (
-          this.isTheSame() ? (
-            <p>Snap it is!!</p>
-          ) : (
-            <p>Draw Again</p>
-          )
-        ) : (
-          <p></p>
-        )} */
+

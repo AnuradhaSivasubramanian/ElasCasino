@@ -1,0 +1,60 @@
+body {
+  background: url("./Photos/Background-game-table.jpeg");
+}
+.table {
+  margin: 10% 5%;
+  position: relative;
+  display: flex;
+  width: 90vw;
+  height: 70vh;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #069652 30.21%,
+    #023d21 99.99%
+  );
+  border: 10px solid #160b05;
+  box-sizing: border-box;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.9);
+  border-radius: 200px;
+}
+.container1 {
+  display: flex;
+  width:100vw;
+  justify-content: space-between;
+  margin:30% -6%;
+    
+}
+.container2 {
+  display: flex;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+
+  .container1{
+    justify-content: space-between;
+    margin:50% -6%;
+}
+}
+
+
+button {
+  font-size: 1em;
+  position: relative;
+  align-content: center;
+  color: #d4ffebe7;
+  width: 15vw;
+  height: 8vh;
+  background: #404040;
+  border: none;
+  box-shadow: -7px -3px 6px rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
+}
+.snap {
+  background: rgba(0, 0, 0, 0.856);
+  border-radius: 30px;
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+button{
+    font-size:1.8em;
+}
+}
