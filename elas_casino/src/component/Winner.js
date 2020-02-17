@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Axios from 'axios'
-import './Winner.css'
+import './Winner.scss'
 
 
 class Winner extends Component{
@@ -24,13 +24,11 @@ this.displayWinner=this.displayWinner.bind(this)
  render(){
      return(
 <div className="display_flex ">
-    <img src={this.state.displayImage} alt=""/>
-         <div className="display_block">
-        <h1>You won!!</h1>
-    <p> Winner Winner Chickens for dinner. 
+    <img src={this.state.displayImage} alt="" className="winner_img"/>
+        <h1 className="winner_h1">You won!!</h1>
+    <p className="winner_p"> Winner Winner Chickens for dinner. 
         Congratulations you won the match!</p>
-        <button>Close</button>
-        </div>
+        <button className="winner_button">Close</button>
        
 </div>
 

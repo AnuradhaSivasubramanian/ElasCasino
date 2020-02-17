@@ -1,8 +1,10 @@
 body {
   background: url("./Photos/Background-game-table.jpeg");
+  height: 50vh;
+  
 }
 .table {
-  margin: 10% 5%;
+  margin: 1% 5%;
   position: relative;
   display: flex;
   width: 90vw;
@@ -16,29 +18,27 @@ body {
   box-sizing: border-box;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.9);
   border-radius: 200px;
+  
 }
 .container1 {
   display: flex;
-  width:100vw;
+  width: 92vw;
   justify-content: space-between;
-  margin:30% -6%;
-    
+  position: relative;
+  top: 100%;
+  left: -2%;
 }
 .container2 {
   display: flex;
+  width: 65vw;
+  justify-content: space-between;
+  position: relative;
+  top: 80%;
+  left: 12%;
 }
-@media only screen and (min-width: 900px) and (max-width: 1050px) {
-
-  .container1{
-    justify-content: space-between;
-    margin:50% -6%;
-}
-}
-
 
 button {
-  font-size: 1em;
-  position: relative;
+  font-size: 0.9em;
   align-content: center;
   color: #d4ffebe7;
   width: 15vw;
@@ -47,14 +47,171 @@ button {
   border: none;
   box-shadow: -7px -3px 6px rgba(0, 0, 0, 0.7);
   border-radius: 10px;
+  cursor: pointer;
 }
 .snap {
-  background: rgba(0, 0, 0, 0.856);
-  border-radius: 30px;
+  font-size: 1em;
+  background: rgba(0, 0, 0, 0.815);
+  border-radius: 100px;
+  width: 10vw;
+  height: 8vh;
 }
 
-@media only screen and (min-width: 900px) and (max-width: 1050px) {
-button{
-    font-size:1.8em;
+.snap:hover {
+  transition: all ease 0.5s;
+  background: rgba(0, 0, 0, 0.986);
+  animation: pulse 1s;
+  box-shadow: 0 0 0 2em rgba(#fff, 0);
 }
+
+@keyframes button {
+  0% {
+    box-shadow: 0 0 0 0 var(--hover);
+  }
+}
+
+button:hover {
+  transform: translateY(-0.25em);
+}
+
+button:focus, button:active {
+  outline: none;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  button {
+    font-size: 1.5em;
+    height: 10vh;
+  }
+}
+
+@media only screen and (min-width: 1050px) {
+  button {
+    font-size: 1.5em;
+    height: 10vh;
+  }
+  .snap {
+    font-size: 1.2em;
+  }
+}
+.container3 {
+  display: inline-flex;
+  width: 75vw;
+  justify-content: space-between;
+  position: relative;
+  left: 5%;
+  bottom: 3vh;
+}
+
+img {
+  width: 15vw;
+  height: 36vh;
+  margin-left: 20px;
+  position: relative;
+  position: relative;
+  left: 4%;
+  right: 5%;
+  bottom: 0;
+}
+
+.backofadeck_on {
+  width: 7vw;
+  height: 17vh;
+  position: relative;
+  left: 5%;
+  right: 5%;
+  bottom: 4vh;
+  transition: all ease;
+  box-shadow: -3px 0px 7px 17px rgba(255, 217, 1, 0.39);
+ 
+}
+.backofadeck_off{
+  width: 7vw;
+  height: 17vh;
+  position: relative;
+  left: 5%;
+  right: 5%;
+  bottom: 4vh;
+ 
+  
+
+}
+p {
+  position: absolute;
+  background-color: rgba(17, 4, 58, 0.65);
+  color: white;
+  font-size: 1em;
+  text-align:center;
+
+}
+.remaning_player1 {
+  padding-bottom: 0.5%;
+  padding-right:  0.5%;
+  top: 60%;
+  left: 2%;
+  text-align:center;
+}
+.remaning_player2 {
+  padding-bottom:  0.5%;
+  padding-right:  0.5%;
+  top: 60%;
+  left: 100%;
+  text-align:center;
+
+}
+.remaning_dumppile {
+  padding-bottom:  0.5%;
+  padding-right:  0.5%;
+  position: absolute;
+  left: 48%;
+  top: 13%;
+  text-align:center;
+
+}
+.dumppile {
+  position: absolute;
+  transform: rotate(90deg);
+  width: 4vw;
+  height: 12vh;
+  left: 45%;
+  top: 3%;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  .remaning_player1 {
+    font-size: 2em;
+    top: 70%;
+    left: 2%;
+  }
+  .remaning_player2 {
+    font-size: 2em;
+    top: 70%;
+    left: 100%;
+  }
+  .remaning_dumppile {
+    font-size: 2em;
+    height: 5vh;
+    padding-bottom: 8px;
+    top: 10%;
+  }
+}
+@media only screen and (min-width: 1050px) {
+  .remaning_player1 {
+    width: 2vw;
+    font-size: 1.5em;
+    padding-left: 15px;
+    top: 70%;
+    left: 7px;
+  }
+  .remaning_player2 {
+    width: 2vw;
+    font-size: 1.5em;
+    padding-left: 8px;
+    top: 70%;
+    left: 100%;
+  }
+
+  .remaning_dumppile {
+    width: 2vw;
+    font-size: 1.5em;
+    padding-left: 9px;
+  }
 }

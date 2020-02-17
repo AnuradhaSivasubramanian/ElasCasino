@@ -1,21 +1,27 @@
 import React, { Component } from "react";
 import axios from "axios";
-import "./GameTable.scss"
+import "./GameTable.scss";
+import TryAgain from './TryAgain'
+import Winner from './Winner'
+import Loser from './Loser'
+
 let myTimeoutFuncPlayer_1 = "";
 let myTimeoutFuncPlayer_2 = "";
-let myTimeoutSnapButton = "";
+let myTimeoutSnapButton= "";
+let myTimeoutflag = "";
 
 class GameLogic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck_id: "uxjo517j8usn",
+      deck_id: "55vh2u4yuq4w",
       player_1_remaining: "",
       player_2_remaining: "",
       player1: [],
       player2: [],
       dumppile: [],
-      WhosTurn: 1
+      WhosTurn: 1,
+      flag: 0
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
@@ -24,8 +30,8 @@ class GameLogic extends Component {
     this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
   }
-  componentDidMount(){
-     axios
+  componentDidMount() {
+    axios
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
       .then(data => {
@@ -63,7 +69,7 @@ class GameLogic extends Component {
         this.setPlayer2Pile(tempCards);
       });
 
-    myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 4000);
+    myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 1000);
   }
 
   setPlayer1Pile(codes) {
@@ -110,12 +116,12 @@ class GameLogic extends Component {
             .then(response =>
               this.setState({
                 dumppile: response.data.piles.dumppile.remaining
-              })
+              }), this.setState({ flag: 0 })
             );
         });
 
       if (this.state.player_2_remaining !== 0) {
-        myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 10000);
+        myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 2000);
       }
     }
   }
@@ -144,31 +150,31 @@ class GameLogic extends Component {
             .then(response =>
               this.setState({
                 dumppile: response.data.piles.dumppile.remaining
-              })
+              }),this.setState({ flag: 0 })
             );
         });
 
       if (this.state.player_1_remaining !== 0) {
-        myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 10000);
+        myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 2000);
       }
     }
     if (
-      this.state.player1.value !== this.state.player2.value &&
+      this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 2) + 1) * 1000
+        (Math.floor(Math.random() * 1) + 1) * 1000
       );
     }
   }
 
   isNoWinner() {
     if (this.state.player_1_remaining === 0) {
-      console.log("player2 won!");
+      this.setState({ flag: 5 });
       return 0;
     } else if (this.state.player_2_remaining === 0) {
-      console.log("player1 won!");
+      this.setState({ flag: 4 });
       return 0;
     } else return 1;
   }
@@ -177,7 +183,7 @@ class GameLogic extends Component {
     clearTimeout(myTimeoutSnapButton);
     let listOfDumppile1 = [];
     if (
-      this.state.player1.value !== this.state.player2.value &&
+      this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
       this.state.WhosTurn === 1
     ) {
@@ -185,26 +191,31 @@ class GameLogic extends Component {
         .get(
           `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
         )
-         .then(response => {
+        .then(response => {
           let listOfDumppile1 = [];
           response.data.piles.dumppile.cards.forEach(element =>
             listOfDumppile1.push(element.code)
           );
           axios
-          .get(
-            `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${listOfDumppile1}`
-          )
-          .then(response =>
-            this.setState({
-              player_1_remaining: response.data.piles.player_1.remaining
-                          })
-          ); });
-      
-    } else {
-      console.log("notequal");
+            .get(
+              `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${listOfDumppile1}`
+            )
+            .then(
+              response =>
+                this.setState({
+                  player_1_remaining: response.data.piles.player_1.remaining
+                }),
+              this.setState({ flag: 1 })
+            );
+        });
     }
+    else{
+      this.setState({ flag: 3 })
+    } 
+      
   }
  
+
   mustSnap_2() {
     this.setState({ WhosTurn: 2 });
     let listOfDumppile2 = [];
@@ -213,40 +224,83 @@ class GameLogic extends Component {
         `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
       )
       .then(response => {
-             response.data.piles.dumppile.cards.forEach(element =>
-            listOfDumppile2.push(element.code)
-          );
-          axios
+        response.data.piles.dumppile.cards.forEach(element =>
+          listOfDumppile2.push(element.code)
+        );
+        axios
           .get(
             `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_2/add/?cards=${listOfDumppile2}`
           )
-          .then(response =>
-            this.setState({
-              player_2_remaining: response.data.piles.player_2.remaining
-            })
-          ); });
-          this.setState({ WhosTurn: 1 });
+          .then(
+            response =>
+              this.setState({
+                player_2_remaining: response.data.piles.player_2.remaining
+              }),
+            this.setState({ flag: 2 })
+          );
+      });
+    this.setState({ WhosTurn: 1 });
+   
   }
 
   render() {
     return (
-      <main >
-         <div className="container1">
-        <button onClick={this.drawOnClick}>Start the Game</button>
-        <button onClick={this.componentDidMount} className="Restart">Restart</button>
-        </div>
-        {<div className="container2">
-        <button onClick={this.mustSnap_1} className="snap">Snap</button>
-        <button className="snap">Snap</button>
-        </div>}
+      <main>
+        <div className="dumpPileDiv">
+          <p className="remaning_dumppile">{this.state.dumppile}</p>
 
-        <img src={this.state.player1.image} alt="" />
-        <img src={this.state.player2.image} alt="" />
+          <img
+            src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+            alt="backofadeck"
+            className="dumppile"
+          />
+        </div>
+        <div className="container2">
+          <button onClick={this.mustSnap_1} className="snap">
+            Snap
+          </button>
+          <button className="snap">Snap</button>
+        </div>
+        <div className="container1">
+          <button onClick={this.drawOnClick}>Start the Game</button>
+        </div>
+        <div className="container3">
+          <div className="container_child1">
+            <img
+              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              alt="backofadeck"
+              className={
+                this.state.flag=== 1
+                  ? "backofadeck_on"
+                  : "backofadeck_off"
+              }
+            />
+            <img src={this.state.player1.image} alt="" />
+            <p className="remaning_player1">{this.state.player_1_remaining}</p>
+          </div>
+          <div > {this.state.flag === 3?<TryAgain/>: null}</div>
+          <div className="container_child2">
+            <img src={this.state.player2.image} alt="" />
+            <img
+              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              alt="backofadeck"
+              className={
+                this.state.flag=== 2
+                  ? "backofadeck_on"
+                  : "backofadeck_off"
+              }
+            />
+            <p className="remaning_player2">{this.state.player_2_remaining}</p>
+          </div>
+          <div className="result">
+            
+           {this.state.flag===4?<Winner/>:null}
+            {this.state.flag===5?<Loser/>:null}
+          </div>
+        </div>
       </main>
     );
   }
 }
 
 export default GameLogic;
-
-

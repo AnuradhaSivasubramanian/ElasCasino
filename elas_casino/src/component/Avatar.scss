@@ -1,0 +1,26 @@
+.avatar_Display {
+  display: flex;
+  justify-content: space-between;
+  width: 60vw;
+  position: relative;
+  left: 20%;
+  top: 5vh;
+}
+.imagem_avatar {
+  width: 7vw;
+  height: 10vh;
+  position: relative;
+  bottom: 2vh;
+
+
+}
+.playerName {
+  width: 15vw;
+  height: 6vh;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 30px;
+  position: relative;
+  top: -4vh;
+  text-align: center;
+  padding-top:10px;
+}
