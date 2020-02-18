@@ -13,7 +13,6 @@
 
 body {
   background: url("./Photos/Background-game-table.jpeg");
-  height: 50vh;
 }
 .table {
   margin: 1% 5%;
@@ -31,13 +30,46 @@ body {
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.9);
   border-radius: 200px;
 }
+h3 {
+  position: absolute;
+  font-family: "Arapey", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 5em;
+  line-height: 77px;
+  left: 43%;
+  top: -26%;
+  color: rgba(255, 255, 255, 0.15);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  h3 {
+    position: absolute;
+    font-size: 7em;
+    left: 43%;
+    top: -6%;
+  }
+}
+@media only screen and (min-width: 1050px) {
+  h3 {
+    position: absolute;
+    font-size: 8em;
+    left: 43%;
+    top: -6%;
+  }
+}
 .container1 {
-  display: flex;
-  width: 92vw;
-  justify-content: space-between;
   position: relative;
-  top: 50%;
-  left: -2%;
+  top: 48%;
+}
+.container1 .snap {
+  width: 20vw;
 }
 .container2 {
   display: flex;
@@ -59,6 +91,13 @@ button {
   box-shadow: -7px -3px 6px rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .snap {
   font-size: 1em;
@@ -114,18 +153,31 @@ button:active {
   left: 5%;
   bottom: 3vh;
 }
-
-img {
+.container_child1 {
+  position: relative;
+  left: 5%;
+}
+.container_child2 {
+  position: relative;
+  left: 8%;
+}
+.card_image {
   width: 15vw;
   height: 36vh;
-  margin-left: 20px;
-  position: relative;
   position: relative;
   left: 4%;
   right: 5%;
   bottom: 0;
 }
-
+.visibility_none {
+  visibility: hidden;
+  width: 15vw;
+  height: 36vh;
+  position: relative;
+  left: 4%;
+  right: 5%;
+  bottom: 0;
+}
 .backofadeck_on {
   width: 7vw;
   height: 17vh;
@@ -134,6 +186,7 @@ img {
   right: 5%;
   bottom: 4vh;
   transition: all ease;
+  margin: 10px;
   box-shadow: -3px 0px 7px 17px rgba(255, 217, 1, 0.39);
 }
 .backofadeck_off {
@@ -143,10 +196,11 @@ img {
   left: 5%;
   right: 5%;
   bottom: 4vh;
+  margin: 10px;
 }
 p {
   position: absolute;
-  background-color: rgba(17, 4, 58, 0.65);
+  background-color: rgba(17, 4, 58, 0.418);
   color: white;
   font-size: 1em;
   text-align: center;
@@ -180,6 +234,13 @@ p {
   height: 12vh;
   left: 45%;
   top: 3%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 @media only screen and (min-width: 900px) and (max-width: 1050px) {
   .remaning_player1 {
