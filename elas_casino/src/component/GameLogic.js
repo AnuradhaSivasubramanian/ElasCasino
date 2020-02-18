@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./GameTable.scss";
-import TryAgain from './TryAgain'
-import Winner from './Winner'
-import Loser from './Loser'
+import TryAgain from "./TryAgain";
+import Winner from "./Winner";
+import Loser from "./Loser";
 
 let myTimeoutFuncPlayer_1 = "";
 let myTimeoutFuncPlayer_2 = "";
-let myTimeoutSnapButton= "";
+let myTimeoutSnapButton = "";
 let myTimeoutflag = "";
 
 class GameLogic extends Component {
@@ -113,10 +113,12 @@ class GameLogic extends Component {
             .get(
               `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player1.code} `
             )
-            .then(response =>
-              this.setState({
-                dumppile: response.data.piles.dumppile.remaining
-              }), this.setState({ flag: 0 })
+            .then(
+              response =>
+                this.setState({
+                  dumppile: response.data.piles.dumppile.remaining
+                }),
+              this.setState({ flag: 0 })
             );
         });
 
@@ -147,10 +149,12 @@ class GameLogic extends Component {
             .get(
               `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player2.code} `
             )
-            .then(response =>
-              this.setState({
-                dumppile: response.data.piles.dumppile.remaining
-              }),this.setState({ flag: 0 })
+            .then(
+              response =>
+                this.setState({
+                  dumppile: response.data.piles.dumppile.remaining
+                }),
+              this.setState({ flag: 0 })
             );
         });
 
@@ -181,7 +185,7 @@ class GameLogic extends Component {
 
   mustSnap_1() {
     clearTimeout(myTimeoutSnapButton);
-    let listOfDumppile1 = [];
+
     if (
       this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
@@ -208,13 +212,10 @@ class GameLogic extends Component {
               this.setState({ flag: 1 })
             );
         });
+    } else {
+      this.setState({ flag: 3 });
     }
-    else{
-      this.setState({ flag: 3 })
-    } 
-      
   }
- 
 
   mustSnap_2() {
     this.setState({ WhosTurn: 2 });
@@ -240,12 +241,11 @@ class GameLogic extends Component {
           );
       });
     this.setState({ WhosTurn: 1 });
-   
   }
 
   render() {
     return (
-      <main>
+      <section>
         <div className="dumpPileDiv">
           <p className="remaning_dumppile">{this.state.dumppile}</p>
 
@@ -254,6 +254,35 @@ class GameLogic extends Component {
             alt="backofadeck"
             className="dumppile"
           />
+        </div>
+        <div className="container3">
+          <div className="container_child1">
+            <img
+              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              alt="backofadeck"
+              className={
+                this.state.flag === 1 ? "backofadeck_on" : "backofadeck_off"
+              }
+            />
+            <img src={this.state.player1.image} alt="" />
+            <p className="remaning_player1">{this.state.player_1_remaining}</p>
+          </div>
+          <div> {this.state.flag === 3 ? <TryAgain /> : null}</div>
+          <div className="container_child2">
+            <img src={this.state.player2.image} alt="" />
+            <img
+              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              alt="backofadeck"
+              className={
+                this.state.flag === 2 ? "backofadeck_on" : "backofadeck_off"
+              }
+            />
+            <p className="remaning_player2">{this.state.player_2_remaining}</p>
+          </div>
+          <div className="result">
+            {this.state.flag === 4 ? <Winner /> : null}
+            {this.state.flag === 5 ? <Loser /> : null}
+          </div>
         </div>
         <div className="container2">
           <button onClick={this.mustSnap_1} className="snap">
@@ -264,41 +293,7 @@ class GameLogic extends Component {
         <div className="container1">
           <button onClick={this.drawOnClick}>Start the Game</button>
         </div>
-        <div className="container3">
-          <div className="container_child1">
-            <img
-              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
-              alt="backofadeck"
-              className={
-                this.state.flag=== 1
-                  ? "backofadeck_on"
-                  : "backofadeck_off"
-              }
-            />
-            <img src={this.state.player1.image} alt="" />
-            <p className="remaning_player1">{this.state.player_1_remaining}</p>
-          </div>
-          <div > {this.state.flag === 3?<TryAgain/>: null}</div>
-          <div className="container_child2">
-            <img src={this.state.player2.image} alt="" />
-            <img
-              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
-              alt="backofadeck"
-              className={
-                this.state.flag=== 2
-                  ? "backofadeck_on"
-                  : "backofadeck_off"
-              }
-            />
-            <p className="remaning_player2">{this.state.player_2_remaining}</p>
-          </div>
-          <div className="result">
-            
-           {this.state.flag===4?<Winner/>:null}
-            {this.state.flag===5?<Loser/>:null}
-          </div>
-        </div>
-      </main>
+      </section>
     );
   }
 }

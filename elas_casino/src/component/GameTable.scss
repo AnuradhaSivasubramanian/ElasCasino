@@ -1,7 +1,19 @@
+.display_none {
+  display: none;
+}
+.playPage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  background: url("./Photos/Background-game-table.jpeg");
+  background-color: blue($color: #000000);
+}
+
 body {
   background: url("./Photos/Background-game-table.jpeg");
   height: 50vh;
-  
 }
 .table {
   margin: 1% 5%;
@@ -18,14 +30,13 @@ body {
   box-sizing: border-box;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.9);
   border-radius: 200px;
-  
 }
 .container1 {
   display: flex;
   width: 92vw;
   justify-content: space-between;
   position: relative;
-  top: 100%;
+  top: 50%;
   left: -2%;
 }
 .container2 {
@@ -33,7 +44,7 @@ body {
   width: 65vw;
   justify-content: space-between;
   position: relative;
-  top: 80%;
+  top: 70%;
   left: 12%;
 }
 
@@ -74,7 +85,8 @@ button:hover {
   transform: translateY(-0.25em);
 }
 
-button:focus, button:active {
+button:focus,
+button:active {
   outline: none;
 }
 @media only screen and (min-width: 900px) and (max-width: 1050px) {
@@ -97,7 +109,8 @@ button:focus, button:active {
   display: inline-flex;
   width: 75vw;
   justify-content: space-between;
-  position: relative;
+  position: absolute;
+  top: 25%;
   left: 5%;
   bottom: 3vh;
 }
@@ -122,50 +135,43 @@ img {
   bottom: 4vh;
   transition: all ease;
   box-shadow: -3px 0px 7px 17px rgba(255, 217, 1, 0.39);
- 
 }
-.backofadeck_off{
+.backofadeck_off {
   width: 7vw;
   height: 17vh;
   position: relative;
   left: 5%;
   right: 5%;
   bottom: 4vh;
- 
-  
-
 }
 p {
   position: absolute;
   background-color: rgba(17, 4, 58, 0.65);
   color: white;
   font-size: 1em;
-  text-align:center;
-
+  text-align: center;
 }
 .remaning_player1 {
   padding-bottom: 0.5%;
-  padding-right:  0.5%;
+  padding-right: 0.5%;
   top: 60%;
   left: 2%;
-  text-align:center;
+  text-align: center;
 }
 .remaning_player2 {
-  padding-bottom:  0.5%;
-  padding-right:  0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 0.5%;
   top: 60%;
   left: 100%;
-  text-align:center;
-
+  text-align: center;
 }
 .remaning_dumppile {
-  padding-bottom:  0.5%;
-  padding-right:  0.5%;
+  padding-bottom: 0.5%;
+  padding-right: 0.5%;
   position: absolute;
   left: 48%;
   top: 13%;
-  text-align:center;
-
+  text-align: center;
 }
 .dumppile {
   position: absolute;
