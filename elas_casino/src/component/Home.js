@@ -1,30 +1,31 @@
 import React from "react";
 import "./Home.css";
 import Rules from "./Rules";
+import GameTable from "./GameTable";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rulesMount: false
+      rulesMount: false,
+      playMount: false
     };
 
     this.toggleRulesMount = this.toggleRulesMount.bind(this);
+    this.togglePlayMount = this.togglePlayMount.bind(this);
   }
-  componentDidUpdate(prevState) {
-    if (prevState.rulesMount !== this.state.rulesMount) {
-      console.log("i am here");
-    }
-  }
+
   toggleRulesMount() {
     this.setState({
       rulesMount: !this.state.rulesMount
     });
   }
-
-  saySomething() {
-    console.log("access approved");
+  togglePlayMount() {
+    this.setState({
+      playMount: !this.state.playMount
+    });
   }
+
   render() {
     return (
       <main className="home_container">
@@ -35,7 +36,9 @@ class Home extends React.Component {
           dolor sit amet, consectetur adipiscing elit.
         </article>
 
-        <button className="pointer">PLAY</button>
+        <button className="pointer" onClick={this.togglePlayMount}>
+          PLAY
+        </button>
         <button className="pointer" onClick={this.toggleRulesMount}>
           RULES
         </button>
@@ -47,9 +50,16 @@ class Home extends React.Component {
             />
           )}
         </div>
+        <div>
+          {!this.state.playMount ? null : (
+            <GameTable
+              action={this.togglePlayMount}
+              playMount={this.state.playMount}
+            />
+          )}
+        </div>
       </main>
     );
   }
 }
 export default Home;
-

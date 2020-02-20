@@ -166,17 +166,18 @@ class GameLogic extends Component {
     }
     if (
       this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0     ) {
+      this.state.dumppile !== 0
+    ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 1)+1) * 500
+        (Math.floor(Math.random() * 1) + 1) * 500
       );
     }
   }
 
   mustSnap_1() {
     clearTimeout(myTimeoutSnapButton);
-    let listOfDumppile1 = [];
+
     if (
       this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
@@ -245,7 +246,7 @@ class GameLogic extends Component {
 
   render() {
     return (
-      <main>
+      <section>
         <div className="dumpPileDiv">
           <p className="remaning_dumppile">{this.state.dumppile}</p>
 
@@ -254,15 +255,6 @@ class GameLogic extends Component {
             alt="backofadeck"
             className="dumppile"
           />
-        </div>
-        <div className="container2">
-          <button onClick={this.mustSnap_1} className="snap">
-            Snap
-          </button>
-          <button className="snap">Snap</button>
-        </div>
-        <div className="container1">
-          <button onClick={this.drawOnClick}>Start the Game</button>
         </div>
         <div className="container3">
           <div className="container_child1">
@@ -307,11 +299,19 @@ class GameLogic extends Component {
           </div>
           <div className="result">
             {this.state.flag === 4 ? <Winner /> : null}
-
             {this.state.flag === 5 ? <Loser /> : null}
           </div>
         </div>
-      </main>
+        <div className="container2">
+          <button onClick={this.mustSnap_1} className="snap">
+            Snap
+          </button>
+          <button className="snap">Snap</button>
+        </div>
+        <div className="container1">
+          <button onClick={this.drawOnClick}>Start the Game</button>
+        </div>
+      </section>
     );
   }
 }

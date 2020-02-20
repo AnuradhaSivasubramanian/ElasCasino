@@ -1,16 +1,16 @@
-import React from 'react'
-import GameLogic from "./GameLogic"
-import Avatar from "./Avatar"
+import React from "react";
+import GameLogic from "./GameLogic";
+import Avatar from "./Avatar";
 
-function GameTable(){
-return(
-<main>
-  <Avatar/>
-  <div className="table">
-   <GameLogic/>
-  </div>  
-</main>
-)
+function GameTable(props) {
+  return (
+    <section className={props.playMount ? "playPage" : "display_none"}>
+      <Avatar />
+      <div className="table">
+        <GameLogic />
+      </div>
+    </section>
+  );
 }
 
-export default GameTable
+export default GameTable;
