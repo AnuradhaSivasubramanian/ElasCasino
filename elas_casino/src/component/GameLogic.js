@@ -209,7 +209,10 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
-        <div className="dumpPileDiv">
+         
+{/* component Dumppile  BackofCards  - RemaningCards*/ }
+         
+         <div className="dumpPileDiv">
           <p className="remaning_dumppile">{this.state.dumppile}</p>
 
           <img
@@ -217,8 +220,16 @@ class GameLogic extends Component {
             alt="backofadeck"
             className="dumppile"
           />
-        </div>
-        <div className="container3">
+                  </div>
+
+{/*          component Dumppile* /}
+
+{/*  Player 1 - BackofCards - DisplayCards - RemaningCards
+ */}       
+ 
+ 
+  <div className="container3">
+
           <div className="container_child1">
             <img
               src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
@@ -226,7 +237,9 @@ class GameLogic extends Component {
               className={
                 this.state.flag === 1 ? "backofadeck_on" : "backofadeck_off"
               }
+
             />
+            
             <img
               src={this.state.player1.image}
               alt=""
@@ -238,9 +251,16 @@ class GameLogic extends Component {
             />
             <p className="remaning_player1">{this.state.player_1_remaining}</p>
           </div>
-          <h3>EC</h3>
-          <div> {this.state.flag === 3 ? <TryAgain /> : null}</div>
-          <div className="container_child2">
+{/*     End of Player - 1
+ */}        
+   <p>EC</p>
+   <div> {this.state.flag === 3 ? <TryAgain /> : null}</div>
+
+
+        
+          
+{/*          Player 2  - BackofCards - DisplayCards - RemaningCards
+ */}          <div className="container_child2">
             <img
               src={this.state.player2.image}
               alt=""
@@ -250,6 +270,7 @@ class GameLogic extends Component {
                   : "card_image"
               }
             />
+
             <img
               src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
               alt="backofadeck"
@@ -257,14 +278,22 @@ class GameLogic extends Component {
                 this.state.flag === 2 ? "backofadeck_on" : "backofadeck_off"
               }
             />
+
             <p className="remaning_player2">{this.state.player_2_remaining}</p>
           </div>
-          <div className="result">
+
+{/*           end of player 2
+ */}         
+ 
+ 
+           <div className="result">
             {this.state.flag === 4 ? <Winner /> : null}
             {this.state.flag === 5 ? <Loser /> : null}
           </div>
         </div>
-        <div className="container2">
+
+{/*        HandlerButtons container - having the 3 buttons
+ */}        <div className="container2">
           <button onClick={this.mustSnap_1} className="snap">
             Snap
           </button>
@@ -273,7 +302,7 @@ class GameLogic extends Component {
         <div className="container1">
           <button onClick={this.drawOnClick}>Start the Game</button>
         </div>
-      </section>
+         </section>
     );
   }
 }
