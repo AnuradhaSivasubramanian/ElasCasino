@@ -5,15 +5,13 @@ import TryAgain from "./TryAgain";
 import Winner from "./Winner";
 import Loser from "./Loser";
 
-let myTimeoutFuncPlayer_1 = "";
-let myTimeoutFuncPlayer_2 = "";
 let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck_id: "dqvjddyoqnxl",
+      deck_id: "92f3sjrskpo7",
       player_1_remaining: "",
       player_2_remaining: "",
       player1: [],
@@ -37,45 +35,32 @@ class GameLogic extends Component {
       .then(data => {
         console.log(data.remaining);
         this.setState({ flag: 0 });
+        this.drawCardsForPlayer("player_1");
+        this.drawCardsForPlayer("player_2");
       });
 
-    axios
-      .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=10`
-      )
-      .then(response => response.data)
-      .then(data => {
-        let tempCards = [];
-        data.cards.forEach(element => {
-          tempCards.push(element.code);
-        });
-        console.log(tempCards);
-
-        this.setPlayer1Pile(tempCards);
-      });
-
-    axios
-      .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=10`
-      )
-      .then(response => response.data)
-      .then(data => {
-        let tempCards = [];
-        data.cards.forEach(element => {
-          tempCards.push(element.code);
-        });
-        console.log(tempCards);
-
-        this.setPlayer2Pile(tempCards);
-      });
-
-    myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 1000);
+    setTimeout(this.drawPlayer_1, 2000);
   }
 
-  setPlayer1Pile(codes) {
+  drawCardsForPlayer(player) {
     axios
       .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${codes}`
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=12`
+      )
+      .then(response => response.data)
+      .then(data => {
+        let tempCards = [];
+        data.cards.forEach(element => {
+          tempCards.push(element.code);
+        });
+        this.setPlayerPile(player, tempCards);
+      });
+  }
+
+  setPlayerPile(pilename, codes) {
+    axios
+      .get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/${pilename}/add/?cards=${codes}`
       )
       .then(response => response.data)
       .then(data => {
@@ -83,20 +68,8 @@ class GameLogic extends Component {
         this.setState({ flag: 0 });
       });
   }
-  setPlayer2Pile(codes) {
-    axios
-      .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_2/add/?cards=${codes}`
-      )
-      .then(response => response.data)
-      .then(data => {
-        this.setState({ player_2_remaining: data.piles.player_2.remaining });
-        this.setState({ flag: 0 });
-      });
-  }
 
   drawPlayer_1() {
-    clearTimeout(myTimeoutFuncPlayer_1);
     if (this.isNoWinner()) {
       axios
         .get(
@@ -110,29 +83,16 @@ class GameLogic extends Component {
             player1: data.cards[0],
             player_1_remaining: data.piles.player_1.remaining
           });
-
-          axios
-            .get(
-              `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player1.code} `
-            )
-            .then(
-              response =>
-                this.setState({
-                  dumppile: response.data.piles.dumppile.remaining
-                }),
-              this.setState({ flag: 0 })
-            );
+          this.moveFromPlayerToDump(this.state.player1.code);
         });
 
       if (this.state.player_2_remaining !== 0) {
-        myTimeoutFuncPlayer_2 = setTimeout(this.drawPlayer_2, 1000);
+        setTimeout(this.drawPlayer_2, 1000);
       }
     }
   }
 
   drawPlayer_2() {
-    clearTimeout(myTimeoutFuncPlayer_2);
-
     if (this.isNoWinner()) {
       axios
         .get(
@@ -147,21 +107,11 @@ class GameLogic extends Component {
             player2: data.cards[0],
             player_2_remaining: data.piles.player_2.remaining
           });
-          axios
-            .get(
-              `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${this.state.player2.code} `
-            )
-            .then(
-              response =>
-                this.setState({
-                  dumppile: response.data.piles.dumppile.remaining
-                }),
-              this.setState({ flag: 0 })
-            );
+          this.moveFromPlayerToDump(this.state.player2.code);
         });
 
       if (this.state.player_1_remaining !== 0) {
-        myTimeoutFuncPlayer_1 = setTimeout(this.drawPlayer_1, 1000);
+        setTimeout(this.drawPlayer_1, 1000);
       }
     }
     if (
@@ -170,11 +120,23 @@ class GameLogic extends Component {
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 1) + 1) * 500
+        (Math.floor(Math.random() * 9) + 1) * 500
       );
     }
   }
-
+  moveFromPlayerToDump(code) {
+    axios
+      .get(
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${code} `
+      )
+      .then(
+        response =>
+          this.setState({
+            dumppile: response.data.piles.dumppile.remaining
+          }),
+        this.setState({ flag: 0 })
+      );
+  }
   mustSnap_1() {
     clearTimeout(myTimeoutSnapButton);
 
