@@ -1,10 +1,10 @@
-.blur{
-  width:110vw;
-  height:110vh;
-  background:#c4c1c149 ;
-  top:-100%;
-  left:-15%;
-  position:absolute;
+.blur {
+  width: 110vw;
+  height: 110vh;
+  background: #c4c1c149;
+  top: -100%;
+  left: -15%;
+  position: absolute;
 }
 .display_flex {
   display: flex;
@@ -14,17 +14,17 @@
   background-attachment: fixed;
   width: 85vw;
   height: 75vh;
-  top:18vh;
+  top: 18vh;
   left: 8vw;
   border-radius: 30px;
   text-align: center;
-  z-index:2;
+  z-index: 2;
 }
 .display_none {
   display: none;
 }
-.display_block{
-  display:block;
+.display_block {
+  display: block;
 }
 .winner_img {
   max-width: 20vw;
@@ -32,8 +32,8 @@
   max-width: 30vw;
   max-height: 55vh;
   margin-top: 9.5vh;
-  margin-left:4vw;
-  margin-right:7vw;
+  margin-left: 4vw;
+  margin-right: 7vw;
   position: relative;
 }
 
@@ -51,7 +51,7 @@
   background: none;
   position: relative;
   font-size: 1em;
-  top:-20%;
+  top: -20%;
 }
 
 .winner_button {
@@ -61,6 +61,7 @@
   background-color: #404040;
   width: 30vw;
   height: 10vh;
+
   box-shadow: -7px -3px 6px rgba(0, 0, 0, 0.7);
   border-style: none;
   border-radius: 10%;
@@ -82,21 +83,20 @@
     margin-top: 9vh;
   }
   .winner_h1 {
-    width:30vw;
+    width: 30vw;
     font-size: 5em;
-    top:2%;
-left:-5vw; 
- }
+    top: 2%;
+    left: -5vw;
+  }
 
   .winner_p {
     margin-top: 29%;
     font-size: 1.5em;
-    left:-5vw; 
+    left: -5vw;
   }
-  .winner_button{
-   padding:2% 3% 4% 3%;
+  .winner_button {
+    padding: 2% 3% 4% 3%;
     font-size: 1.8em;
-   
   }
 }
 //Ipad
@@ -111,10 +111,10 @@ left:-5vw;
   }
   .winner_h1 {
     position: relative;
-    width:100%;
+    width: 100%;
     font-size: 7em;
-    top:0%;
-    left:4%;
+    top: 0%;
+    left: 4%;
   }
   .winner_p {
     display: none;
@@ -125,5 +125,4 @@ left:-5vw;
     font-size: 2em;
     right: 20%;
   }
-  
 }
