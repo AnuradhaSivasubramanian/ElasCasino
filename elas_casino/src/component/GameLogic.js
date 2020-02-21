@@ -230,11 +230,11 @@ class GameLogic extends Component {
         </main>
         {this.state.flag === 3 ? <TryAgain /> : null}
 
-        <DisplayWinnerOrLoser  />
-        {/*    {this.state.flag === 4 || this.state.flag === 5 ? (
-          <DisplayWinnerOrLoser result={this.state.flag} />
-        ) : null} */}
 
+          {this.state.flag === 4 || this.state.flag === 5 ? (
+          <DisplayWinnerOrLoser result={this.state.flag} />
+        ) : null}
+ 
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"

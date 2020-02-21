@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import "./scss/Winner.scss";
+import "./scss/DisplayWinnerOrLoser.scss";
+import GiveTheResult from "./GiveTheResult";
 
 class DisplayWinnerOrLoser extends Component {
   constructor(props) {
@@ -14,24 +15,29 @@ class DisplayWinnerOrLoser extends Component {
   }
   componentDidMount() {
     this.decidetheWinner();
-    this.APIWinnerOrLoser();
+    //this.APIWinnerOrLoser();
   }
 
   decidetheWinner() {
     if (this.props.result === 5) {
-      this.setState({ WinnerOrCry: "cry" });
+      // this.APIWinnerOrLoser goes here
+      const status = "cry"
+      this.APIWinnerOrLoser(status)
     } else {
+      const status = "Winner"
+      this.APIWinnerOrLoser(status)
       this.setState({ WinnerOrCry: "Winner" });
     }
   }
 
-  APIWinnerOrLoser() {
+  APIWinnerOrLoser(status) {
     Axios.get(
-      `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${this.state.WinnerOrCry}&rating=G
+      `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${status}&rating=G
             `
-    ).then(response =>
-      this.setState({ displayImage: response.data.data.images.original.url })
-    );
+    ).then(response => {
+      console.log(response.data);
+      this.setState({ displayImage: response.data.data.images.original.url });
+    });
   }
 
   unmount() {
@@ -42,17 +48,13 @@ class DisplayWinnerOrLoser extends Component {
     return (
       <section className={this.state.flag === false ? "blur" : "display_none "}>
         <div className="display_flex">
-          <img src={this.state.displayImage} alt="" className="winner_img" />
+          <img
+            src={this.state.displayImage}
+            alt=" Gif"
+            className="winner_img"
+          />
           <div className="display_block">
-            <h1 className="winner_h1">
-              {this.state.WinnerOrCry === "Winner" ? "You won!!" : "You lost!!"}
-            </h1>
-            <p className="winner_p">
-              {" "}
-              {this.state.WinnerOrCry === "Winner"
-                ? "Winner Winner Chickens for dinner. Congratulations you won the match!"
-                : "  Kuan Kuan Kuan. You lost the game, but DON'T CRY you can keep playing it!"}
-            </p>
+            <GiveTheResult WinnerOrCry={this.state.WinnerOrCry} />
           </div>
           <button onClick={this.unmount} className="winner_button">
             Close

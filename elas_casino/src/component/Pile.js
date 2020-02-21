@@ -43,6 +43,10 @@ function Pile({
             flagValue={flagValueBackOfTheCards}
             backofthedeckID={isDumppile ? "BackOfTheDeck_Dumppile" : null}
           />
+            <RemainingCards
+          name={nameTheRemainingCards}
+          playerRemainingCards={playerRemainingCards}
+        />
         </div>
         {isDisplayCard ? (
           <DisplayCard
@@ -50,10 +54,7 @@ function Pile({
             flagValue={flagValueDisplayCard}
           />
         ) : null}
-        <RemainingCards
-          name={nameTheRemainingCards}
-          playerRemainingCards={playerRemainingCards}
-        />
+      
       </div>
     );
   }
