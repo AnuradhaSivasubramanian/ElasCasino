@@ -5,6 +5,8 @@ import TryAgain from "./TryAgain";
 import Winner from "./Winner";
 import Loser from "./Loser";
 
+import Card from "./Photos/BackOfaDeck2.png";
+
 let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
@@ -16,7 +18,7 @@ class GameLogic extends Component {
       player_2_remaining: "",
       player1: [],
       player2: [],
-      dumppile: [],
+      dumppile: "",
       WhosTurn: 1,
       flag: 0
     };
@@ -37,9 +39,10 @@ class GameLogic extends Component {
         this.setState({ flag: 0 });
         this.drawCardsForPlayer("player_1");
         this.drawCardsForPlayer("player_2");
-      });
+      })
+      .catch(error => console.error(`something went wrong: ${error}`));
 
-    setTimeout(this.drawPlayer_1, 2000);
+    setTimeout(this.drawPlayer_1, 4000);
   }
 
   drawCardsForPlayer(player) {
@@ -53,65 +56,54 @@ class GameLogic extends Component {
         data.cards.forEach(element => {
           tempCards.push(element.code);
         });
-        this.setPlayerPile(player, tempCards);
+        this.addCardsToPile(tempCards, player, 0);
       });
   }
 
-  setPlayerPile(pilename, codes) {
+  addCardsToPile(codes, pilename, setFlag) {
     axios
       .get(
         `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/${pilename}/add/?cards=${codes}`
       )
       .then(response => response.data)
       .then(data => {
-        this.setState({ player_1_remaining: data.piles.player_1.remaining });
-        this.setState({ flag: 0 });
-      });
+        if (pilename === "player_1") {
+          this.setState({ player_1_remaining: data.piles.player_1.remaining });
+        }
+        if (pilename === "player_2") {
+          this.setState({
+            player_1_remaining: data.piles.player_1.remaining,
+            player_2_remaining: data.piles.player_2.remaining
+          });
+        }
+        if (pilename === "dumppile") {
+          this.setState({
+            player_1_remaining: data.piles.player_1.remaining,
+            player_2_remaining: data.piles.player_2.remaining,
+            dumppile: data.piles.dumppile.remaining
+          });
+        }
+        this.setState({ flag: setFlag });
+      })
+      .catch(error => console.error(`something went wrong: ${error}`));
   }
 
   drawPlayer_1() {
     if (this.isNoWinner()) {
-      axios
-        .get(
-          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/draw/bottom/?count=1`
-        )
-        .then(response => response.data)
-        .then(data => {
-          console.log(data);
-          console.log(`${data.cards[0].suit} ${data.cards[0].value}`);
-          this.setState({
-            player1: data.cards[0],
-            player_1_remaining: data.piles.player_1.remaining
-          });
-          this.moveFromPlayerToDump(this.state.player1.code);
-        });
+      this.drawACardForPlayer("player_1", 1);
 
       if (this.state.player_2_remaining !== 0) {
-        setTimeout(this.drawPlayer_2, 1000);
+        setTimeout(this.drawPlayer_2, 5000);
       }
     }
   }
 
   drawPlayer_2() {
     if (this.isNoWinner()) {
-      axios
-        .get(
-          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_2/draw/bottom/?count=1`
-        )
-        .then(response => response.data)
-        .then(data => {
-          console.log(data);
-          console.log(`${data.cards[0].suit} ${data.cards[0].value}`);
-
-          this.setState({
-            player2: data.cards[0],
-            player_2_remaining: data.piles.player_2.remaining
-          });
-          this.moveFromPlayerToDump(this.state.player2.code);
-        });
+      this.drawACardForPlayer("player_2", 1);
 
       if (this.state.player_1_remaining !== 0) {
-        setTimeout(this.drawPlayer_1, 1000);
+        setTimeout(this.drawPlayer_1, 5000);
       }
     }
     if (
@@ -120,23 +112,36 @@ class GameLogic extends Component {
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 9) + 1) * 500
+        (Math.floor(Math.random() * 9) + 1) * 1000
       );
     }
   }
-  moveFromPlayerToDump(code) {
+
+  drawACardForPlayer(pilename, noOfCards) {
     axios
       .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/add/?cards=${code} `
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/${pilename}/draw/bottom/?count=${noOfCards}`
       )
-      .then(
-        response =>
+      .then(response => response.data)
+      .then(data => {
+        if (pilename === "player_1") {
           this.setState({
-            dumppile: response.data.piles.dumppile.remaining
-          }),
-        this.setState({ flag: 0 })
-      );
+            player1: data.cards[0],
+            player_1_remaining: data.piles.player_1.remaining
+          });
+          this.addCardsToPile(this.state.player1.code, "dumppile", 0);
+        }
+        if (pilename === "player_2") {
+          this.setState({
+            player2: data.cards[0],
+            player_2_remaining: data.piles.player_1.remaining
+          });
+          this.addCardsToPile(this.state.player2.code, "dumppile", 0);
+        }
+      })
+      .catch(error => console.error(`something went wrong: ${error}`));
   }
+
   mustSnap_1() {
     clearTimeout(myTimeoutSnapButton);
 
@@ -145,27 +150,7 @@ class GameLogic extends Component {
       this.state.dumppile !== 0 &&
       this.state.WhosTurn === 1
     ) {
-      axios
-        .get(
-          `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
-        )
-        .then(response => {
-          let listOfDumppile1 = [];
-          response.data.piles.dumppile.cards.forEach(element =>
-            listOfDumppile1.push(element.code)
-          );
-          axios
-            .get(
-              `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_1/add/?cards=${listOfDumppile1}`
-            )
-            .then(
-              response =>
-                this.setState({
-                  player_1_remaining: response.data.piles.player_1.remaining
-                }),
-              this.setState({ flag: 1 })
-            );
-        });
+      this.dumpPileToPlayer("player_1", 1);
     } else {
       this.setState({ flag: 3 });
     }
@@ -173,28 +158,22 @@ class GameLogic extends Component {
 
   mustSnap_2() {
     this.setState({ WhosTurn: 2 });
-    let listOfDumppile2 = [];
+    this.dumpPileToPlayer("player_2", 2);
+    this.setState({ WhosTurn: 1 });
+  }
+  dumpPileToPlayer(pilename, flagValue) {
+    let listOfDumppile = [];
     axios
       .get(
         `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/dumppile/list/`
       )
       .then(response => {
         response.data.piles.dumppile.cards.forEach(element =>
-          listOfDumppile2.push(element.code)
+          listOfDumppile.push(element.code)
         );
-        axios
-          .get(
-            `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/pile/player_2/add/?cards=${listOfDumppile2}`
-          )
-          .then(
-            response =>
-              this.setState({
-                player_2_remaining: response.data.piles.player_2.remaining
-              }),
-            this.setState({ flag: 2 })
-          );
-      });
-    this.setState({ WhosTurn: 1 });
+        this.addCardsToPile(listOfDumppile, pilename, flagValue);
+      })
+      .catch(error => console.error(`something went wrong: ${error}`));
   }
   isNoWinner() {
     if (this.state.player_1_remaining === 0) {
@@ -212,16 +191,12 @@ class GameLogic extends Component {
         <div className="dumpPileDiv">
           <p className="remaning_dumppile">{this.state.dumppile}</p>
 
-          <img
-            src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
-            alt="backofadeck"
-            className="dumppile"
-          />
+          <img src={Card} alt="backofadeck" className="dumppile" />
         </div>
         <div className="container3">
           <div className="container_child1">
             <img
-              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              src={Card}
               alt="backofadeck"
               className={
                 this.state.flag === 1 ? "backofadeck_on" : "backofadeck_off"
@@ -251,7 +226,7 @@ class GameLogic extends Component {
               }
             />
             <img
-              src="https://cdn.pixabay.com/photo/2012/05/07/18/53/card-game-48982_640.png"
+              src={Card}
               alt="backofadeck"
               className={
                 this.state.flag === 2 ? "backofadeck_on" : "backofadeck_off"
