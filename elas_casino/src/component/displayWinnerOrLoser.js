@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
-import "./Winner.scss";
+import "./scss/Winner.scss";
 
-class displayWinnerOrLoser extends Component {
+class DisplayWinnerOrLoser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,33 +10,31 @@ class displayWinnerOrLoser extends Component {
       displayImage: " ",
       flag: false
     };
-    this.displayWinner = this.displayWinner.bind(this);
     this.unmount = this.unmount.bind(this);
-    this.decidedeWinner = this.decidedeWinner.bind(this);
-
   }
   componentDidMount() {
-    this.displayWinnerOrLoser();
+    this.decidetheWinner();
+    this.APIWinnerOrLoser();
   }
 
-  decidedeWinner({result}){
-    if({result}===5){
-      this.setState({WinnerOrCry:"cry"})}
-  else{
-    this.setState({WinnerOrCry:"Winner"})
-  }
+  decidetheWinner() {
+    if (this.props.result === 5) {
+      this.setState({ WinnerOrCry: "cry" });
+    } else {
+      this.setState({ WinnerOrCry: "Winner" });
     }
+  }
 
   APIWinnerOrLoser() {
-      Axios.get(
-      `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${this.WinnerOrCry}&rating=G
+    Axios.get(
+      `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${this.state.WinnerOrCry}&rating=G
             `
     ).then(response =>
       this.setState({ displayImage: response.data.data.images.original.url })
     );
   }
 
-   unmount() {
+  unmount() {
     this.setState({ flag: true });
   }
 
@@ -46,11 +44,14 @@ class displayWinnerOrLoser extends Component {
         <div className="display_flex">
           <img src={this.state.displayImage} alt="" className="winner_img" />
           <div className="display_block">
-            <h1 className="winner_h1">You won!!</h1>
+            <h1 className="winner_h1">
+              {this.state.WinnerOrCry === "Winner" ? "You won!!" : "You lost!!"}
+            </h1>
             <p className="winner_p">
               {" "}
-              Winner Winner Chickens for dinner. Congratulations you won the
-              match!
+              {this.state.WinnerOrCry === "Winner"
+                ? "Winner Winner Chickens for dinner. Congratulations you won the match!"
+                : "  Kuan Kuan Kuan. You lost the game, but DON'T CRY you can keep playing it!"}
             </p>
           </div>
           <button onClick={this.unmount} className="winner_button">
@@ -62,4 +63,4 @@ class displayWinnerOrLoser extends Component {
   }
 }
 
-export default displayWinnerOrLoser;
+export default DisplayWinnerOrLoser;

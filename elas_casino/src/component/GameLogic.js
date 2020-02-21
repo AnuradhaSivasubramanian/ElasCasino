@@ -3,10 +3,8 @@ import axios from "axios";
 import "./scss/Logo.scss";
 import TryAgain from "./TryAgain";
 import Pile from "./Pile";
-import displayWinnerOrLoser from "./displayWinnerOrLoser";
+import DisplayWinnerOrLoser from "./DisplayWinnerOrLoser";
 import Buttons from "./Buttons";
-
-import Card from "./Photos/BackOfaDeck2.png";
 
 let myTimeoutSnapButton = "";
 
@@ -94,7 +92,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_1", 1);
 
       if (this.state.player_2_remaining !== 0) {
-        setTimeout(this.drawPlayer_2, 5000);
+        setTimeout(this.drawPlayer_2, 1000);
       }
     }
   }
@@ -104,7 +102,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_2", 1);
 
       if (this.state.player_1_remaining !== 0) {
-        setTimeout(this.drawPlayer_1, 5000);
+        setTimeout(this.drawPlayer_1, 1000);
       }
     }
     if (
@@ -232,9 +230,10 @@ class GameLogic extends Component {
         </main>
         {this.state.flag === 3 ? <TryAgain /> : null}
 
-        {this.state.flag === 4 || this.state.flag === 3 ? (
-          <displayWinnerOrLoser result={this.state.flag} />
-        ) : null}
+        <DisplayWinnerOrLoser  />
+        {/*    {this.state.flag === 4 || this.state.flag === 5 ? (
+          <DisplayWinnerOrLoser result={this.state.flag} />
+        ) : null} */}
 
         <Buttons
           onclick={this.drawOnClick}

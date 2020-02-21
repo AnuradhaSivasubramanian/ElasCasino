@@ -8,13 +8,14 @@ body {
     top: 0%;
     left: 0%;
     background-color: blue($color: #000000);
-  }}
+  }
+}
+
 
 
 .display_none {
   display: none;
 }
-
 
 .table {
   margin: 1% 5%;
@@ -33,48 +34,37 @@ body {
   border-radius: 200px;
 }
 
-
-main{
+main {
   display: flex;
-  
-  }
+}
 
-  .player_1_container{
-    position:relative;
-    top:4vh;
-    left:3vw;
+.player_1_container {
+  position: relative;
+  top: 4vh;
+  left: 3vw;
+}
+.player_2_container {
+  position: relative;
+  top: 4vh;
+  left: 32vw;
+}
+.positionLogo {
+  position: relative;
+  top: 4vh;
+  left: 25%;
+}
 
+@media only screen and (min-width: 950px) and (max-width: 1110px) {
+  .player_1_container {
+    position: relative;
+    top: 10vh;
+    left: 5vw;
   }
-  .player_2_container{
-    position:relative;
-    top:4vh;
-    left:32vw;
-
+  .player_2_container {
+    position: relative;
+    top: 10vh;
   }
-  .positionLogo{
-    position:relative;
-    top:4vh;
-    left:25%;
+  .positionLogo {
+    top: 7vh;
   }
- 
-  @media only screen 
-  and (min-width : 950px) 
-  and (max-width : 1110px) 
-   {
-  
-    .player_1_container{
-      position:relative;
-      top:10vh;
-      left:5vw;
-    
-    }
-    .player_2_container{
-      position:relative;
-      top:10vh;
-    }
- .positionLogo{
-   top:7vh;
- }
-  }
-
-
+}
