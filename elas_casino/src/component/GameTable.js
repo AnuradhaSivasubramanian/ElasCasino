@@ -1,10 +1,11 @@
 import React from "react";
 import GameLogic from "./GameLogic";
 import Avatar from "./Avatar";
+import "./GameTable.scss"
 
 function GameTable(props) {
   return (
-    <section className={props.playMount ? "playPage" : "display_none"}>
+    <section>
       <Avatar />
       <div className="table">
         <GameLogic />
