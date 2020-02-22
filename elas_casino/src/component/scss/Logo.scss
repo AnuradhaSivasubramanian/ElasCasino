@@ -1,0 +1,41 @@
+.positionLogo p {
+  background: none;
+  position: absolute;
+  font-family: "Arapey", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 6em;
+  line-height: 77px;
+  left: 43%;
+  top: -26%;
+  color: rgba(255, 255, 255, 0.349);
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+#C {
+  margin-left: 26px;
+  color: rgba(255, 255, 255, 0.15);
+
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  .positionLogo p {
+    position: absolute;
+    font-size: 10em;
+    left: 43%;
+    top: 0;
+  }
+}
+@media only screen and (min-width: 1050px) {
+  .positionLogo p{
+    position: absolute;
+    font-size: 8em;
+    left: 43%;
+    top: -6%;
+  }
+}
