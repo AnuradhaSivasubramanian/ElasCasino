@@ -6,6 +6,8 @@ import Pile from "./Pile";
 import DisplayWinnerOrLoser from "./DisplayWinnerOrLoser";
 import Buttons from "./Buttons";
 
+// import Card from "./Photos/BackOfaDeck2.png";
+
 let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
@@ -134,7 +136,7 @@ class GameLogic extends Component {
           this.setState({
             player2: data.cards[0],
             player_2_remaining: data.piles.player_2.remaining
-         });
+          });
           this.addCardsToPile(this.state.player2.code, "dumppile", 0);
         }
       })
@@ -187,47 +189,54 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
-        <Pile
-          nameTheRemainingCards="remaining_dumppile"
-          playerRemainingCards={this.state.dumppile}
-          flagValueBackOfTheCards={this.state.flag}
-          isDumppile
-        />
-
-        <main>
+        <div className="cards_container">
           <div className="player_1_container">
             <Pile
               nameTheRemainingCards="remaining_player1"
               playerRemainingCards={this.state.player_1_remaining}
-              flagValueBackOfTheCards={this.state.flag}
+              flagValueBackOfTheCards={
+                this.state.flag === 1 ? this.state.flag : null
+              }
               isDisplayCard
               displayCardImage={this.state.player1.image}
               flagValueDisplayCard={this.state.flag}
             />
-            <Buttons
-              onclick={this.mustSnap_1}
-              nameClass="snapButton"
-              buttonName="SNAP"
+          </div>
+          <div className="middle_container">
+            <Pile
+              nameTheRemainingCards="remaining_dumppile"
+              playerRemainingCards={this.state.dumppile}
+              isDumppile
             />
+            <div className="positionLogo">
+              <p>E</p>
+              <p id="C">C</p>
+            </div>
           </div>
 
-          <div className="positionLogo">
-            <p>E</p>
-            <p id="C">C</p>
-          </div>
           <div className="player_2_container">
             <Pile
               nameTheRemainingCards="remaining_player2"
               playerRemainingCards={this.state.player_2_remaining}
-              flagValueBackOfTheCards={this.state.flag}
-              isDisplayCard
+              flagValueBackOfTheCards={
+                this.state.flag === 2 ? this.state.flag : null
+              }
+              isDisplayCard={true}
               displayCardImage={this.state.player2.image}
               flagValueDisplayCard={this.state.flag}
               player2Plays
             />
-            <Buttons nameClass="snapButton" buttonName="SNAP" />
           </div>
-        </main>
+        </div>
+        <div className="snapButton_container">
+          <Buttons
+            onclick={this.mustSnap_1}
+            nameClass="snapButton"
+            buttonName="SNAP"
+          />
+          <Buttons nameClass="snapButton" buttonName="SNAP" />
+        </div>
+
         {this.state.flag === 3 ? <TryAgain /> : null}
 
         {this.state.flag === 4 || this.state.flag === 5 ? (

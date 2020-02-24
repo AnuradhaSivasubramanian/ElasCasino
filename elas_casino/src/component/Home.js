@@ -35,13 +35,21 @@ class Home extends React.Component {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
           dolor sit amet, consectetur adipiscing elit.
         </article>
+        <div>
+          <button
+            className="pointer home_container_button"
+            onClick={this.togglePlayMount}
+          >
+            PLAY
+          </button>
+          <button
+            className="pointer home_container_button"
+            onClick={this.toggleRulesMount}
+          >
+            RULES
+          </button>
+        </div>
 
-        <button className="pointer" onClick={this.togglePlayMount}>
-          PLAY
-        </button>
-        <button className="pointer" onClick={this.toggleRulesMount}>
-          RULES
-        </button>
         <div>
           {!this.state.rulesMount ? null : (
             <Rules
