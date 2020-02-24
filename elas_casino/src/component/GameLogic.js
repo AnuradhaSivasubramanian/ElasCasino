@@ -6,8 +6,6 @@ import Pile from "./Pile";
 import DisplayWinnerOrLoser from "./DisplayWinnerOrLoser";
 import Buttons from "./Buttons";
 
-// import Card from "./Photos/BackOfaDeck2.png";
-
 let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
@@ -94,7 +92,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_1", 1);
 
       if (this.state.player_2_remaining !== 0) {
-        setTimeout(this.drawPlayer_2, 3000);
+        setTimeout(this.drawPlayer_2, 1500);
       }
     }
   }
@@ -104,7 +102,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_2", 1);
 
       if (this.state.player_1_remaining !== 0) {
-        setTimeout(this.drawPlayer_1, 3000);
+        setTimeout(this.drawPlayer_1, 1500);
       }
     }
     if (
@@ -152,6 +150,7 @@ class GameLogic extends Component {
       this.state.WhosTurn === 1
     ) {
       this.dumpPileToPlayer("player_1", 1);
+      this.setState({ player2: [] });
     } else {
       this.setState({ flag: 3 });
     }
@@ -160,6 +159,7 @@ class GameLogic extends Component {
   mustSnap_2() {
     this.setState({ WhosTurn: 2 });
     this.dumpPileToPlayer("player_2", 2);
+    this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
   }
   dumpPileToPlayer(pilename, flagValue) {
