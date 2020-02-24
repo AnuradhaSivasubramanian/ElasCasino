@@ -32,7 +32,7 @@ class Home extends React.Component {
         <h1 className="home_container_h1">Ela’s casino</h1>
         <article>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          
+          eiusmod tempor incididunt
         </article>
         <div>
           <button
