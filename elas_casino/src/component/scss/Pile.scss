@@ -1,0 +1,21 @@
+.display_inline {
+  display: inline-flex;
+}
+#BackOfTheDeck_Dumppile {
+  position: absolute;
+  transform: rotate(90deg);
+  min-width: 5vw;
+  min-height: 15vh;
+  width: 5.4vw;
+  height: 15vh;
+  left: 5%;
+  top: 3%;
+  margin-top: 0%;
+}
+
+@media only screen and (min-device-width: 900px) and (max-device-width: 1100px) and (orientation: landscape) {
+  #BackOfTheDeck_Dumppile {
+    width: 7vw;
+    height: 14vh;
+  }
+}

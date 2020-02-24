@@ -1,0 +1,19 @@
+.card_image {
+  width: 15vw;
+  height: 36vh;
+  position: relative;
+}
+
+.visibility_none {
+  width: 15vw;
+  height: 36vh;
+  position: relative;
+
+  visibility: hidden;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  .card_image {
+    width: 16vw;
+    height: 31vh;
+  }
+}
