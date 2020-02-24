@@ -29,11 +29,10 @@ class Home extends React.Component {
   render() {
     return (
       <main className="home_container">
-        <h1>Ela’s casino</h1>
+        <h1 className="home_container_h1">Ela’s casino</h1>
         <article>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum
-          dolor sit amet, consectetur adipiscing elit.
+          
         </article>
         <div>
           <button

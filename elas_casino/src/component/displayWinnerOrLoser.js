@@ -15,17 +15,15 @@ class DisplayWinnerOrLoser extends Component {
   }
   componentDidMount() {
     this.decidetheWinner();
-    //this.APIWinnerOrLoser();
   }
 
   decidetheWinner() {
     if (this.props.result === 5) {
-      // this.APIWinnerOrLoser goes here
-      const status = "cry"
-      this.APIWinnerOrLoser(status)
+      const status = "cry";
+      this.APIWinnerOrLoser(status);
     } else {
-      const status = "Claps"
-      this.APIWinnerOrLoser(status)
+      const status = "Claps";
+      this.APIWinnerOrLoser(status);
       this.setState({ WinnerOrCry: "Winner" });
     }
   }
@@ -55,10 +53,11 @@ class DisplayWinnerOrLoser extends Component {
           />
           <div className="display_block">
             <GiveTheResult WinnerOrCry={this.state.WinnerOrCry} />
-          </div>
+            </div>
           <button onClick={this.unmount} className="winner_button">
             Close
           </button>
+         
         </div>
       </section>
     );

@@ -12,7 +12,7 @@
 .home_container p {
   font-family: "Arapey", serif;
 }
-.home_container h1 {
+.home_container_h1{
   width: 40%;
   margin: 3% 15px;
   font-family: "Calistoga", cursive;
@@ -45,7 +45,7 @@ button:active {
   outline: none;
 }
 @media screen and (min-width: 768px) and (max-width: 1150px) {
-  .home_container h1 {
+  .home_container_h1{
     width: 40%;
     margin: 10% 15px;
     font-size: 8rem;
@@ -68,7 +68,7 @@ button:active {
   }
 }
 @media (min-width: 1150px) {
-  .home_container h1 {
+  .home_container_h1{
     width: 40%;
     margin: 8% 15px;
     font-size: 8rem;
