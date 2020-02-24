@@ -1,12 +1,11 @@
 import React from "react";
 
-
-import GameTable from "./component/GameTable";
+import Home from "./component/Home";
 class App extends React.Component {
   render() {
     return (
       <main>
-        <GameTable />
+        <Home />
       </main>
     );
   }

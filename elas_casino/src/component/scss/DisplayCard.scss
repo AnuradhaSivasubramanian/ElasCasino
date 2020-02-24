@@ -2,17 +2,18 @@
   width: 15vw;
   height: 36vh;
   position: relative;
-  left: 4%;
-  right: 5%;
-  bottom: 0;
 }
 
 .visibility_none {
   width: 15vw;
   height: 36vh;
   position: relative;
-  left: 4%;
-  right: 5%;
-  bottom: 0;
+
   visibility: hidden;
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  .card_image {
+    width: 16vw;
+    height: 31vh;
+  }
 }

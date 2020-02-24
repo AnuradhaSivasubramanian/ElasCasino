@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import "./Winner.scss";
 
-class displayWinnerOrLoser extends Component {
+class DisplayWinnerOrLoser extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,25 +10,24 @@ class displayWinnerOrLoser extends Component {
       displayImage: " ",
       flag: false
     };
-    this.displayWinner = this.displayWinner.bind(this);
+
     this.unmount = this.unmount.bind(this);
     this.decidedeWinner = this.decidedeWinner.bind(this);
-
   }
   componentDidMount() {
-    this.displayWinnerOrLoser();
+    this.APIWinnerOrLoser();
   }
 
-  decidedeWinner({result}){
-    if({result}===5){
-      this.setState({WinnerOrCry:"cry"})}
-  else{
-    this.setState({WinnerOrCry:"Winner"})
-  }
+  decidedeWinner({ result }) {
+    if ({ result } === 5) {
+      this.setState({ WinnerOrCry: "cry" });
+    } else {
+      this.setState({ WinnerOrCry: "Winner" });
     }
+  }
 
   APIWinnerOrLoser() {
-      Axios.get(
+    Axios.get(
       `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${this.WinnerOrCry}&rating=G
             `
     ).then(response =>
@@ -36,7 +35,7 @@ class displayWinnerOrLoser extends Component {
     );
   }
 
-   unmount() {
+  unmount() {
     this.setState({ flag: true });
   }
 
@@ -62,4 +61,4 @@ class displayWinnerOrLoser extends Component {
   }
 }
 
-export default displayWinnerOrLoser;
+export default DisplayWinnerOrLoser;

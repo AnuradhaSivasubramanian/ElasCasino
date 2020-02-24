@@ -1,22 +1,26 @@
-
-  .backofadeck_off {
-    width: 7vw;
-    height: 17vh;
-    position: relative;
-    left: 5%;
-    right: 5%;
-    bottom: 4vh;
-    margin: 10px;
- }
-
- 
- .backofadeck_on {
+.backofadeck_off {
   width: 7vw;
   height: 17vh;
-  position: relative;
-  left: 5%;
-  right: 5%;
-  bottom: 4vh;
-  margin: 10px;
+  top: 40%;
+  margin: 15px;
+  margin-top: 55%;
+}
+
+.backofadeck_on {
+  width: 7vw;
+  height: 17vh;
+  top: 40%;
+  margin: 15px;
+  margin-top: 55%;
   box-shadow: -3px 0px 7px 17px rgba(255, 217, 1, 0.39);
- }
+}
+@media only screen and (min-width: 900px) and (max-width: 1050px) {
+  .backofadeck_on {
+    width: 8vw;
+    height: 15vh;
+  }
+  .backofadeck_off {
+    width: 8vw;
+    height: 15vh;
+  }
+}

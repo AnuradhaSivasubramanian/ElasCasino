@@ -52,7 +52,7 @@ function Pile({
         ) : null}
         <RemainingCards
           name={nameTheRemainingCards}
-          player={playerRemainingCards}
+          playerRemainingCards={playerRemainingCards}
         />
       </div>
     );
