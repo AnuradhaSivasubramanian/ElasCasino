@@ -20,15 +20,19 @@
     margin-right:15%;
   }
   @media only screen and (min-width: 1025px) {
-  
+    .container {
+    margin-top:10%;
+    }
       .winner_h1 {
         position:relative;
-        font-size: 5.5em;
-        left:20%;
+        font-size: 5em;
+        left:0%;
+        
          }
        
       .winner_p {
         font-size: 1.5em;
+        
        }}
        @media only screen and (min-width: 900px) and (max-width: 1024px) {
         .winner_h1 {

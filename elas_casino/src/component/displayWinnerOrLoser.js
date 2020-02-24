@@ -24,7 +24,7 @@ class DisplayWinnerOrLoser extends Component {
       const status = "cry"
       this.APIWinnerOrLoser(status)
     } else {
-      const status = "Winner"
+      const status = "Claps"
       this.APIWinnerOrLoser(status)
       this.setState({ WinnerOrCry: "Winner" });
     }

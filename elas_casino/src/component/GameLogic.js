@@ -12,7 +12,7 @@ class GameLogic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck_id: "92f3sjrskpo7",
+      deck_id: "eva6wcqxpba4",
       player_1_remaining: "",
       player_2_remaining: "",
       player1: [],
@@ -41,13 +41,13 @@ class GameLogic extends Component {
       })
       .catch(error => console.error(`something went wrong: ${error}`));
 
-    setTimeout(this.drawPlayer_1, 4000);
+    setTimeout(this.drawPlayer_1, 1000);
   }
 
   drawCardsForPlayer(player) {
     axios
       .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=12`
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=26`
       )
       .then(response => response.data)
       .then(data => {
@@ -92,7 +92,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_1", 1);
 
       if (this.state.player_2_remaining !== 0) {
-        setTimeout(this.drawPlayer_2, 1000);
+        setTimeout(this.drawPlayer_2, 600);
       }
     }
   }
@@ -102,7 +102,7 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_2", 1);
 
       if (this.state.player_1_remaining !== 0) {
-        setTimeout(this.drawPlayer_1, 1000);
+        setTimeout(this.drawPlayer_1, 600);
       }
     }
     if (
@@ -111,7 +111,7 @@ class GameLogic extends Component {
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 9) + 1) * 1000
+        (Math.floor(Math.random() * 9) + 1) * 500
       );
     }
   }
@@ -133,8 +133,8 @@ class GameLogic extends Component {
         if (pilename === "player_2") {
           this.setState({
             player2: data.cards[0],
-            player_2_remaining: data.piles.player_1.remaining
-          });
+            player_2_remaining: data.piles.player_2.remaining
+         });
           this.addCardsToPile(this.state.player2.code, "dumppile", 0);
         }
       })
@@ -157,7 +157,7 @@ class GameLogic extends Component {
 
   mustSnap_2() {
     this.setState({ WhosTurn: 2 });
-    this.dumpPileToPlayer("player_2", 2);
+    this.dumpPileToPlayer("player_2", 1);
     this.setState({ WhosTurn: 1 });
   }
   dumpPileToPlayer(pilename, flagValue) {
@@ -220,7 +220,7 @@ class GameLogic extends Component {
               nameTheRemainingCards="remaining_player2"
               playerRemainingCards={this.state.player_2_remaining}
               flagValueBackOfTheCards={this.state.flag}
-              isDisplayCard={true}
+              isDisplayCard
               displayCardImage={this.state.player2.image}
               flagValueDisplayCard={this.state.flag}
               player2Plays
@@ -230,11 +230,10 @@ class GameLogic extends Component {
         </main>
         {this.state.flag === 3 ? <TryAgain /> : null}
 
-
-          {this.state.flag === 4 || this.state.flag === 5 ? (
+        {this.state.flag === 4 || this.state.flag === 5 ? (
           <DisplayWinnerOrLoser result={this.state.flag} />
         ) : null}
- 
+
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"
