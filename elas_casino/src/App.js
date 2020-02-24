@@ -1,12 +1,13 @@
 import React from "react";
 
-
-import GameTable from "./component/GameTable";
+import Home from "./component/Home";
+/* import DisplayWinnerOrLoser from "./component/DisplayWinnerOrLoser";
+import GameTable from "./component/GameTable"; */
 class App extends React.Component {
   render() {
     return (
       <main>
-        <GameTable />
+        <Home />
       </main>
     );
   }

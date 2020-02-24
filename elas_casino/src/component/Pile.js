@@ -54,7 +54,10 @@ function Pile({
             flagValue={flagValueDisplayCard}
           />
         ) : null}
-      
+        <RemainingCards
+          name={nameTheRemainingCards}
+          playerRemainingCards={playerRemainingCards}
+        />
       </div>
     );
   }

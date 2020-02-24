@@ -1,45 +1,47 @@
 
-.container {
-    width:100%;
-    margin-top:15%;
-  }
+
 .winner_h1 {
     font-family: "Calistoga", cursive;
     color: white;
     font-size: 3.5em;
-    position:relative;
-    margin:0;
+    margin:0%;
+    margin-left: 5%;
+   
     
   }
+
     .winner_p {
     color: white;
     font-size: 1.2em;
     background: none;
-    position: relative;
-    margin-top:3%;
-    margin-right:15%;
+    margin:0%;
+  
   }
   @media only screen and (min-width: 1025px) {
-  
+    .container {
+    margin-top:10%;
+    }
       .winner_h1 {
-        position:relative;
-        font-size: 5.5em;
-        left:20%;
+        font-size: 5.8em;
+        margin-left:18%;
+        width:100%;
+        
+
+        
          }
        
       .winner_p {
         font-size: 1.5em;
+        margin:0%;
+        
        }}
        @media only screen and (min-width: 900px) and (max-width: 1024px) {
         .winner_h1 {
    
             font-size: 7.5em;
-            position:relative;
-            top:10%;
+          
           }
           .winner_p {
             display: none;
           }
-          .container {
-            margin-top:25%;
-          }}
+         }
