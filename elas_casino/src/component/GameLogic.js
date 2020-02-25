@@ -5,6 +5,7 @@ import TryAgain from "./TryAgain";
 import Pile from "./Pile";
 import DisplayWinnerOrLoser from "./DisplayWinnerOrLoser";
 import Buttons from "./Buttons";
+import Sound from "./Sounds"
 
 let myTimeoutSnapButton = "";
 
@@ -107,7 +108,9 @@ class GameLogic extends Component {
     }
     if (
       this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0 && (this.state.player_1_remaining !== 0 ||this.state.player_2_remaining !== 0)
+      this.state.dumppile !== 0 &&
+      (this.state.player_1_remaining !== 0 ||
+        this.state.player_2_remaining !== 0)
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
@@ -189,6 +192,7 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
+        <Sound  Soundflag={this.state.flag}/>
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
