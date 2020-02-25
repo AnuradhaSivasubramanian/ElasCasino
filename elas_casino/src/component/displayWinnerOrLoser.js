@@ -8,7 +8,7 @@ class DisplayWinnerOrLoser extends Component {
     super(props);
     this.state = {
       WinnerOrCry: "",
-      displayImage: " ",
+      displayImage: "",
       flag: false
     };
     this.unmount = this.unmount.bind(this);

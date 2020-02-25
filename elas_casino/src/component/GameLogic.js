@@ -150,12 +150,16 @@ class GameLogic extends Component {
     if (
       this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
-      this.state.WhosTurn === 1
+      this.state.WhosTurn === 1 &&
+      this.state.player_1_remaining > 0
     ) {
+      console.log("I am inside if");
       this.dumpPileToPlayer("player_1", 1);
       this.setState({ player2: [] });
     } else {
-      this.setState({ flag: 3 });
+      if (this.state.player_1_remaining > 0) {
+        this.setState({ flag: 3 });
+      }
     }
   }
 
