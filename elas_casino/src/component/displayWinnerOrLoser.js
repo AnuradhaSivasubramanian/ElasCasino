@@ -8,7 +8,7 @@ class DisplayWinnerOrLoser extends Component {
     super(props);
     this.state = {
       WinnerOrCry: "",
-      displayImage: " ",
+      displayImage: "",
       flag: false
     };
     this.unmount = this.unmount.bind(this);
@@ -41,6 +41,11 @@ class DisplayWinnerOrLoser extends Component {
   unmount() {
     this.setState({ flag: true });
   }
+  componentWillUnmount() {
+    if (this.state.flag === true) {
+      console.log("component will unmount");
+    }
+  }
 
   render() {
     return (
@@ -53,11 +58,10 @@ class DisplayWinnerOrLoser extends Component {
           />
           <div className="display_block">
             <GiveTheResult WinnerOrCry={this.state.WinnerOrCry} />
-            </div>
+          </div>
           <button onClick={this.unmount} className="winner_button">
             Close
           </button>
-         
         </div>
       </section>
     );
