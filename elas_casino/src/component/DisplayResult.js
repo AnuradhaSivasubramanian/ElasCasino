@@ -3,7 +3,7 @@ import Axios from "axios";
 import "./scss/DisplayWinnerOrLoser.scss";
 import GiveTheResult from "./GiveTheResult";
 
-class DisplayWinnerOrLoser extends Component {
+class DisplayResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,4 +68,4 @@ class DisplayWinnerOrLoser extends Component {
   }
 }
 
-export default DisplayWinnerOrLoser;
+export default DisplayResult;
