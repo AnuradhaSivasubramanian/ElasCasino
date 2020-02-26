@@ -20,7 +20,7 @@ class GameLogic extends Component {
       dumppile: "",
       WhosTurn: 1,
       flag: 0,
-      countCards: 0,
+      countCards: 0
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
@@ -44,7 +44,6 @@ class GameLogic extends Component {
     }
   }
 
-
   drawOnClick() {
     axios
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
@@ -57,13 +56,15 @@ class GameLogic extends Component {
       })
       .catch(error => console.error(`something went wrong: ${error}`));
 
-if(this.props.selectLevel){
-    setTimeout(this.drawPlayer_1, 3000);
-  console.log(this.props.selectLevel)
-  console.log("easy")
-}    else{ setTimeout(this.drawPlayer_1, 600) 
-    console.log("hard")
-   console.log(this.props.selectLevel)}
+    if (this.props.selectLevel) {
+      setTimeout(this.drawPlayer_1, 3000);
+      console.log(this.props.selectLevel);
+      console.log("easy");
+    } else {
+      setTimeout(this.drawPlayer_1, 600);
+      console.log("hard");
+      console.log(this.props.selectLevel);
+    }
   }
 
   drawCardsForPlayer(player) {
@@ -113,26 +114,26 @@ if(this.props.selectLevel){
     if (this.isNoWinner()) {
       this.drawACardForPlayer("player_1", 1);
 
-      if (this.state.player_2_remaining !== 0 )
-      {if(this.props.selectLevel){
-        setTimeout(this.drawPlayer_2, 3000);
-    
-    }    else{ setTimeout(this.drawPlayer_2, 600) 
-       }
-      }}
+      if (this.state.player_2_remaining !== 0) {
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_2, 3000);
+        } else {
+          setTimeout(this.drawPlayer_2, 600);
+        }
+      }
     }
-  
+  }
 
   drawPlayer_2() {
     if (this.isNoWinner()) {
       this.drawACardForPlayer("player_2", 1);
 
-      if (this.state.player_1_remaining !== 0 )
-      {if(this.props.selectLevel){
-        setTimeout(this.drawPlayer_1, 3000);
-    
-    }    else{ setTimeout(this.drawPlayer_1, 600) 
-       }
+      if (this.state.player_1_remaining !== 0) {
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_1, 3000);
+        } else {
+          setTimeout(this.drawPlayer_1, 600);
+        }
       }
     }
     if (
@@ -140,8 +141,7 @@ if(this.props.selectLevel){
       this.state.dumppile !== 0 &&
       (this.state.player_1_remaining !== 0 ||
         this.state.player_2_remaining !== 0)
-    )
-     {
+    ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
         (Math.floor(Math.random() * 9) + 1) * 500
@@ -159,14 +159,16 @@ if(this.props.selectLevel){
         if (pilename === "player_1") {
           this.setState({
             player1: data.cards[0],
-            player_1_remaining: data.piles.player_1.remaining
+            player_1_remaining: data.piles.player_1.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player1.code, "dumppile", 0);
         }
         if (pilename === "player_2") {
           this.setState({
             player2: data.cards[0],
-            player_2_remaining: data.piles.player_2.remaining
+            player_2_remaining: data.piles.player_2.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player2.code, "dumppile", 0);
         }
@@ -226,7 +228,7 @@ if(this.props.selectLevel){
   render() {
     return (
       <section>
-        <Sounds soundValue={this.state.flag}/>
+        <Sounds soundValue={this.state.flag} />
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
@@ -285,7 +287,6 @@ if(this.props.selectLevel){
           nameClass="StartButton"
           buttonName="Start the game"
         />
-        <Sounds soundValue={this.state.flag} />
       </section>
     );
   }
