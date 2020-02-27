@@ -3,23 +3,24 @@ import axios from "axios";
 import "./scss/Logo.scss";
 import TryAgain from "./TryAgain";
 import Pile from "./Pile";
-import DisplayWinnerOrLoser from "./DisplayWinnerOrLoser";
+import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
-
+import Sounds from "./Sounds";
 let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      deck_id: "eva6wcqxpba4",
+      deck_id: "",
       player_1_remaining: "",
       player_2_remaining: "",
       player1: [],
       player2: [],
       dumppile: "",
       WhosTurn: 1,
-      flag: 0
+      flag: 0,
+      countCards: 0
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
@@ -27,6 +28,20 @@ class GameLogic extends Component {
     this.mustSnap_1 = this.mustSnap_1.bind(this);
     this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
+    this.fullDeck = this.fullDeck.bind(this);
+  }
+  componentDidMount() {
+    this.fullDeck();
+  }
+
+  fullDeck() {
+    if (this.props.selectDeck === true) {
+      this.setState({ deck_id: "hd8bdiq23g4m" });
+      this.setState({ countCards: 26 });
+    } else {
+      this.setState({ deck_id: "5eb1ajr3aoxt" });
+      this.setState({ countCards: 13 });
+    }
   }
 
   drawOnClick() {
@@ -41,13 +56,21 @@ class GameLogic extends Component {
       })
       .catch(error => console.error(`something went wrong: ${error}`));
 
-    setTimeout(this.drawPlayer_1, 1000);
+    if (this.props.selectLevel) {
+      setTimeout(this.drawPlayer_1, 3000);
+      console.log(this.props.selectLevel);
+      console.log("easy");
+    } else {
+      setTimeout(this.drawPlayer_1, 600);
+      console.log("hard");
+      console.log(this.props.selectLevel);
+    }
   }
 
   drawCardsForPlayer(player) {
     axios
       .get(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=26`
+        `https://deckofcardsapi.com/api/deck/${this.state.deck_id}/draw/?count=${this.state.countCards}`
       )
       .then(response => response.data)
       .then(data => {
@@ -92,7 +115,11 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_1", 1);
 
       if (this.state.player_2_remaining !== 0) {
-        setTimeout(this.drawPlayer_2, 600);
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_2, 3000);
+        } else {
+          setTimeout(this.drawPlayer_2, 600);
+        }
       }
     }
   }
@@ -102,12 +129,18 @@ class GameLogic extends Component {
       this.drawACardForPlayer("player_2", 1);
 
       if (this.state.player_1_remaining !== 0) {
-        setTimeout(this.drawPlayer_1, 600);
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_1, 3000);
+        } else {
+          setTimeout(this.drawPlayer_1, 600);
+        }
       }
     }
     if (
       this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0 && (this.state.player_1_remaining !== 0 ||this.state.player_2_remaining !== 0)
+      this.state.dumppile !== 0 &&
+      (this.state.player_1_remaining !== 0 ||
+        this.state.player_2_remaining !== 0)
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
@@ -126,14 +159,16 @@ class GameLogic extends Component {
         if (pilename === "player_1") {
           this.setState({
             player1: data.cards[0],
-            player_1_remaining: data.piles.player_1.remaining
+            player_1_remaining: data.piles.player_1.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player1.code, "dumppile", 0);
         }
         if (pilename === "player_2") {
           this.setState({
             player2: data.cards[0],
-            player_2_remaining: data.piles.player_2.remaining
+            player_2_remaining: data.piles.player_2.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player2.code, "dumppile", 0);
         }
@@ -147,12 +182,16 @@ class GameLogic extends Component {
     if (
       this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
-      this.state.WhosTurn === 1
+      this.state.WhosTurn === 1 &&
+      this.state.player_1_remaining > 0
     ) {
+      console.log("I am inside if");
       this.dumpPileToPlayer("player_1", 1);
       this.setState({ player2: [] });
     } else {
-      this.setState({ flag: 3 });
+      if (this.state.player_1_remaining > 0) {
+        this.setState({ flag: 3 });
+      }
     }
   }
 
@@ -189,6 +228,7 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
+        <Sounds soundValue={this.state.flag} />
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
@@ -239,7 +279,7 @@ class GameLogic extends Component {
 
         {this.state.flag === 3 ? <TryAgain /> : null}
         {this.state.flag === 4 || this.state.flag === 5 ? (
-          <DisplayWinnerOrLoser result={this.state.flag} />
+          <DisplayResult result={this.state.flag} />
         ) : null}
 
         <Buttons

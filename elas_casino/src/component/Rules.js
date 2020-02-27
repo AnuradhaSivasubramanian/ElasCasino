@@ -1,17 +1,6 @@
 import React from "react";
 import "./Rules.css";
 class Rules extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rulesMount: true
-    };
-  }
-  toggleRulesMount() {
-    this.setState({
-      rulesMount: false
-    });
-  }
   render() {
     return (
       <section
