@@ -5,8 +5,8 @@ import TryAgain from "./TryAgain";
 import Pile from "./Pile";
 import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
-import Sounds from "./Sounds";
-let myTimeoutSnapButton = "";
+/* import Sounds from "./Sounds";
+ */ let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class GameLogic extends Component {
 
   fullDeck() {
     if (this.props.selectDeck === true) {
-      this.setState({ deck_id: "hd8bdiq23g4m" });
+      this.setState({ deck_id: "1zbmzpx5yxvt" });
       this.setState({ countCards: 26 });
     } else {
       this.setState({ deck_id: "5eb1ajr3aoxt" });
@@ -92,6 +92,7 @@ class GameLogic extends Component {
         if (pilename === "player_1") {
           this.setState({ player_1_remaining: data.piles.player_1.remaining });
         }
+
         if (pilename === "player_2") {
           this.setState({
             player_1_remaining: data.piles.player_1.remaining,
@@ -137,8 +138,8 @@ class GameLogic extends Component {
       }
     }
     if (
-      this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0 &&
+      this.state.player1.value === this.state.player2.value 
+        &&
       (this.state.player_1_remaining !== 0 ||
         this.state.player_2_remaining !== 0)
     ) {
@@ -147,6 +148,8 @@ class GameLogic extends Component {
         (Math.floor(Math.random() * 9) + 1) * 500
       );
     }
+
+  
   }
 
   drawACardForPlayer(pilename, noOfCards) {
@@ -180,7 +183,8 @@ class GameLogic extends Component {
     clearTimeout(myTimeoutSnapButton);
 
     if (
-      this.state.player1.value === this.state.player2.value &&
+      this.state.player1.value === this.state.player2.value 
+    &&
       this.state.dumppile !== 0 &&
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
@@ -200,6 +204,7 @@ class GameLogic extends Component {
     this.dumpPileToPlayer("player_2", 2);
     this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
+    console.log("computer snap");
   }
   dumpPileToPlayer(pilename, flagValue) {
     let listOfDumppile = [];
@@ -228,7 +233,7 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
-        <Sounds soundValue={this.state.flag} />
+           <Sounds soundValue={this.state.flag} />
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
@@ -276,12 +281,10 @@ class GameLogic extends Component {
           />
           <Buttons nameClass="snapButton" buttonName="SNAP" />
         </div>
-
         {this.state.flag === 3 ? <TryAgain /> : null}
         {this.state.flag === 4 || this.state.flag === 5 ? (
           <DisplayResult result={this.state.flag} />
         ) : null}
-
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"
