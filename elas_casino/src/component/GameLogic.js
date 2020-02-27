@@ -162,14 +162,16 @@ class GameLogic extends Component {
         if (pilename === "player_1") {
           this.setState({
             player1: data.cards[0],
-            player_1_remaining: data.piles.player_1.remaining
+            player_1_remaining: data.piles.player_1.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player1.code, "dumppile", 0);
         }
         if (pilename === "player_2") {
           this.setState({
             player2: data.cards[0],
-            player_2_remaining: data.piles.player_2.remaining
+            player_2_remaining: data.piles.player_2.remaining,
+            flag: 0
           });
           this.addCardsToPile(this.state.player2.code, "dumppile", 0);
         }
@@ -231,8 +233,7 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
-        {/*         <Sounds soundValue={this.state.flag}/>
-         */}{" "}
+           <Sounds soundValue={this.state.flag} />
         <div className="cards_container">
           <div className="player_1_container">
             <Pile

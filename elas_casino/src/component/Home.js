@@ -27,11 +27,13 @@ class Home extends React.Component {
       rulesMount: !this.state.rulesMount
     });
   }
+
   togglePlayMount() {
     this.setState({
       playMount: !this.state.playMount
     });
   }
+
   toggleSettingsMount() {
     this.setState({
       settingsMount: !this.state.settingsMount
