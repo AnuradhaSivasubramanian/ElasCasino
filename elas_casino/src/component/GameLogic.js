@@ -5,8 +5,8 @@ import TryAgain from "./TryAgain";
 import Pile from "./Pile";
 import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
-import Sounds from "./Sounds";
-let myTimeoutSnapButton = "";
+/* import Sounds from "./Sounds";
+ */ let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ class GameLogic extends Component {
       dumppile: "",
       WhosTurn: 1,
       flag: 0,
-      countCards: 0,
+      countCards: 0
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
@@ -36,14 +36,13 @@ class GameLogic extends Component {
 
   fullDeck() {
     if (this.props.selectDeck === true) {
-      this.setState({ deck_id: "hd8bdiq23g4m" });
+      this.setState({ deck_id: "1zbmzpx5yxvt" });
       this.setState({ countCards: 26 });
     } else {
       this.setState({ deck_id: "5eb1ajr3aoxt" });
       this.setState({ countCards: 13 });
     }
   }
-
 
   drawOnClick() {
     axios
@@ -57,13 +56,15 @@ class GameLogic extends Component {
       })
       .catch(error => console.error(`something went wrong: ${error}`));
 
-if(this.props.selectLevel){
-    setTimeout(this.drawPlayer_1, 3000);
-  console.log(this.props.selectLevel)
-  console.log("easy")
-}    else{ setTimeout(this.drawPlayer_1, 600) 
-    console.log("hard")
-   console.log(this.props.selectLevel)}
+    if (this.props.selectLevel) {
+      setTimeout(this.drawPlayer_1, 3000);
+      console.log(this.props.selectLevel);
+      console.log("easy");
+    } else {
+      setTimeout(this.drawPlayer_1, 600);
+      console.log("hard");
+      console.log(this.props.selectLevel);
+    }
   }
 
   drawCardsForPlayer(player) {
@@ -91,6 +92,7 @@ if(this.props.selectLevel){
         if (pilename === "player_1") {
           this.setState({ player_1_remaining: data.piles.player_1.remaining });
         }
+
         if (pilename === "player_2") {
           this.setState({
             player_1_remaining: data.piles.player_1.remaining,
@@ -113,40 +115,41 @@ if(this.props.selectLevel){
     if (this.isNoWinner()) {
       this.drawACardForPlayer("player_1", 1);
 
-      if (this.state.player_2_remaining !== 0 )
-      {if(this.props.selectLevel){
-        setTimeout(this.drawPlayer_2, 3000);
-    
-    }    else{ setTimeout(this.drawPlayer_2, 600) 
-       }
-      }}
+      if (this.state.player_2_remaining !== 0) {
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_2, 3000);
+        } else {
+          setTimeout(this.drawPlayer_2, 600);
+        }
+      }
     }
-  
+  }
 
   drawPlayer_2() {
     if (this.isNoWinner()) {
       this.drawACardForPlayer("player_2", 1);
 
-      if (this.state.player_1_remaining !== 0 )
-      {if(this.props.selectLevel){
-        setTimeout(this.drawPlayer_1, 3000);
-    
-    }    else{ setTimeout(this.drawPlayer_1, 600) 
-       }
+      if (this.state.player_1_remaining !== 0) {
+        if (this.props.selectLevel) {
+          setTimeout(this.drawPlayer_1, 3000);
+        } else {
+          setTimeout(this.drawPlayer_1, 600);
+        }
       }
     }
     if (
-      this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0 &&
+      this.state.player1.value === this.state.player2.value 
+        &&
       (this.state.player_1_remaining !== 0 ||
         this.state.player_2_remaining !== 0)
-    )
-     {
+    ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
         (Math.floor(Math.random() * 9) + 1) * 500
       );
     }
+
+  
   }
 
   drawACardForPlayer(pilename, noOfCards) {
@@ -178,7 +181,8 @@ if(this.props.selectLevel){
     clearTimeout(myTimeoutSnapButton);
 
     if (
-      this.state.player1.value === this.state.player2.value &&
+      this.state.player1.value === this.state.player2.value 
+    &&
       this.state.dumppile !== 0 &&
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
@@ -198,6 +202,7 @@ if(this.props.selectLevel){
     this.dumpPileToPlayer("player_2", 2);
     this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
+    console.log("computer snap");
   }
   dumpPileToPlayer(pilename, flagValue) {
     let listOfDumppile = [];
@@ -226,7 +231,8 @@ if(this.props.selectLevel){
   render() {
     return (
       <section>
-        <Sounds soundValue={this.state.flag}/>
+        {/*         <Sounds soundValue={this.state.flag}/>
+         */}{" "}
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
@@ -274,18 +280,15 @@ if(this.props.selectLevel){
           />
           <Buttons nameClass="snapButton" buttonName="SNAP" />
         </div>
-
         {this.state.flag === 3 ? <TryAgain /> : null}
         {this.state.flag === 4 || this.state.flag === 5 ? (
           <DisplayResult result={this.state.flag} />
         ) : null}
-
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"
           buttonName="Start the game"
         />
-        <Sounds soundValue={this.state.flag} />
       </section>
     );
   }
