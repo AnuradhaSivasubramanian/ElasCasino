@@ -11,6 +11,12 @@
 
   visibility: hidden;
 }
+#placeholdercard{
+  width: 15vw;
+  height: 36vh;
+  position: absolute;
+  visibility: hidden;
+}
 @media only screen and (min-width: 900px) and (max-width: 1050px) {
   .card_image {
     width: 16vw;

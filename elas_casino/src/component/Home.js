@@ -55,8 +55,7 @@ class Home extends React.Component {
       <main className="home_container">
         <h1 className="home_container_h1">Ela’s casino</h1>
         <article>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt
+          Are you ready to play Snap?
         </article>
         <div className="buttons_container">
           <button
