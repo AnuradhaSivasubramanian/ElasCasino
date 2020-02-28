@@ -55,7 +55,7 @@ const list = [
 const AvatarList = () => (
   
   <div className="avatar_div">
-    {/* <div className="bigDiv"> */}
+   
     {list.map((item, index) => (
       <AvatarImplement
         key={index}
@@ -64,8 +64,7 @@ const AvatarList = () => (
       />
       
     ))}
-{/*     </div>
- */}  </div>
+ </div>
 );
 
 export default AvatarList;

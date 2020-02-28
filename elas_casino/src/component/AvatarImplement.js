@@ -13,12 +13,11 @@ class AvatarImplement extends React.Component {
       
       <section className="container">
         
-{/*         <div  >
- */}          
+         
           <ul className="imgContainer">
           <li className="imgItem"><img src={this.props.image} onClick={this.handleClick} alt="avatar" className="avatar" /></li>
           </ul>
-       {/*  </div> */}
+      
       </section>
      
     );
