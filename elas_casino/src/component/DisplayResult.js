@@ -3,12 +3,12 @@ import Axios from "axios";
 import "./scss/DisplayWinnerOrLoser.scss";
 import GiveTheResult from "./GiveTheResult";
 
-class DisplayWinnerOrLoser extends Component {
+class DisplayResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
       WinnerOrCry: "",
-      displayImage: " ",
+      displayImage: "",
       flag: false
     };
     this.unmount = this.unmount.bind(this);
@@ -41,6 +41,11 @@ class DisplayWinnerOrLoser extends Component {
   unmount() {
     this.setState({ flag: true });
   }
+  componentWillUnmount() {
+    if ( this.state.flag === true){
+      console.log("component unmount")
+    }
+  }
 
   render() {
     return (
@@ -53,15 +58,14 @@ class DisplayWinnerOrLoser extends Component {
           />
           <div className="display_block">
             <GiveTheResult WinnerOrCry={this.state.WinnerOrCry} />
-            </div>
+          </div>
           <button onClick={this.unmount} className="winner_button">
             Close
           </button>
-         
         </div>
       </section>
     );
   }
 }
 
-export default DisplayWinnerOrLoser;
+export default DisplayResult;

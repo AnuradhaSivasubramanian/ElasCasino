@@ -1,14 +1,14 @@
-/* import React from 'react'
-import "./TurnYourPhone.scss"
-
+import React from 'react'
+import TurnPhone from "./Photos/turn_your_phone.gif"
 
 function TurnYourPhone(){
 return(
     <div className="turnBody">
- <h1>I am here</h1> 
+ <img src={TurnPhone} alt="turn your phone" id="phonegif"/>
+ <h1 id="turnphone_h1">Turn your Phone or maximize your Screen</h1>
      </div>
 
 )
 }
 
-export default TurnYourPhone */
+export default TurnYourPhone
