@@ -5,8 +5,8 @@ import TryAgain from "./TryAgain";
 import Pile from "./Pile";
 import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
-/* import Sounds from "./Sounds";
- */ let myTimeoutSnapButton = "";
+ import Sounds from "./Sounds";
+  let myTimeoutSnapButton = "";
 
 class GameLogic extends Component {
   constructor(props) {

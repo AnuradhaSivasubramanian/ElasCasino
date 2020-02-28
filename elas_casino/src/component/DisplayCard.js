@@ -4,6 +4,9 @@ import "./scss/DisplayCard.scss"
 function DisplayCard({displaycard, flagValue}){
 return(
     <div>
+        <div id="placeholdercard">
+        </div>
+
 <img
 src={displaycard}
 alt=""
@@ -12,8 +15,7 @@ className={
     ? "visibility_none"
     : "card_image"
 } />
-
-    </div>
+</div>
 )
 
 }
