@@ -12,7 +12,7 @@ class Home extends React.Component {
       playMount: false,
       settingsMount: false,
       isFullDeck: false,
-      isLevelHard: false
+      isLevelHard: true
     };
 
     this.toggleRulesMount = this.toggleRulesMount.bind(this);

@@ -29,6 +29,7 @@ class GameLogic extends Component {
     this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
     this.fullDeck = this.fullDeck.bind(this);
+    this.resultUnmount = this.resultUnmount.bind(this);
   }
   componentDidMount() {
     this.fullDeck();
@@ -43,8 +44,23 @@ class GameLogic extends Component {
       this.setState({ countCards: 13 });
     }
   }
+  resultUnmount() {
+    this.setState({
+      flag: 0
+    });
+    console.log("set flag to 0");
+  }
 
   drawOnClick() {
+    this.setState({
+      player_1_remaining: "",
+      player_2_remaining: "",
+      player1: [],
+      player2: [],
+      dumppile: "",
+      WhosTurn: 1,
+      flag: 0
+    });
     axios
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
@@ -61,7 +77,7 @@ class GameLogic extends Component {
       console.log(this.props.selectLevel);
       console.log("easy");
     } else {
-      setTimeout(this.drawPlayer_1, 600);
+      setTimeout(this.drawPlayer_1, 1000);
       console.log("hard");
       console.log(this.props.selectLevel);
     }
@@ -118,7 +134,7 @@ class GameLogic extends Component {
         if (this.props.selectLevel) {
           setTimeout(this.drawPlayer_2, 3000);
         } else {
-          setTimeout(this.drawPlayer_2, 600);
+          setTimeout(this.drawPlayer_2, 1000);
         }
       }
     }
@@ -132,7 +148,7 @@ class GameLogic extends Component {
         if (this.props.selectLevel) {
           setTimeout(this.drawPlayer_1, 3000);
         } else {
-          setTimeout(this.drawPlayer_1, 600);
+          setTimeout(this.drawPlayer_1, 1000);
         }
       }
     }
@@ -144,7 +160,7 @@ class GameLogic extends Component {
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 9) + 1) * 500
+        (Math.floor(Math.random() * 9) + 1) * 1000
       );
     }
   }
@@ -279,7 +295,10 @@ class GameLogic extends Component {
 
         {this.state.flag === 3 ? <TryAgain /> : null}
         {this.state.flag === 4 || this.state.flag === 5 ? (
-          <DisplayResult result={this.state.flag} />
+          <DisplayResult
+            result={this.state.flag}
+            actiondisplay={this.resultUnmount}
+          />
         ) : null}
 
         <Buttons
