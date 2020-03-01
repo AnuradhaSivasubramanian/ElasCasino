@@ -4,6 +4,7 @@ import Rules from "./Rules";
 import GameTable from "./GameTable";
 import Settings from "./Settings";
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -12,16 +13,76 @@ class Home extends React.Component {
       playMount: false,
       settingsMount: false,
       isFullDeck: false,
-      isLevelHard: true
-    };
+      isLevelHard: true,
+    
+      avatarList :[ {
+        image:
+          "https://api.adorable.io/avatars/158/abott@ab45t09ytiiip4l8le.io.png",
+        
+      },
+    
+      {
+        image:
+          "https://api.adorable.io/avatars/146/abott@ab45t09ytiiiip4l8le.io.png",
+        
+      },
+    
+     
+      {
+        image: "https://api.adorable.io/avatars/285/abott@ab45y4l8lepink.io.png",
+       
+      },
+    
+      {
+        image: "https://api.adorable.io/avatars/285/abott@ab45y4l8leoran.io.png",
+        
+      },
+    
+      {
+        image:
+          "https://api.adorable.io/avatars/285/abott@a5y4l8leor8iro7rmrng36n.io.png",
+        
+      },
+    
+      {
+        image: "https://api.adorable.io/avatars/285/abott@a5irmrng36n.io.png",
+        
+      },
+    
+      {
+        image: "https://api.adorable.io/avatars/285/abott@a51011jokopmin.io.png",
+        
+      },
+    
+      {
+        image: "https://api.adorable.io/avatars/285/abott@a5mouth7.io.png",
+        
+      }],
+        selectedAvatar:"",
+        mountAvatar:false,
+     playerName: "Player 1"
+ }
 
     this.toggleRulesMount = this.toggleRulesMount.bind(this);
     this.togglePlayMount = this.togglePlayMount.bind(this);
     this.toggleSettingsMount = this.toggleSettingsMount.bind(this);
     this.toggleDeckSize = this.toggleDeckSize.bind(this);
     this.toggleLevel = this.toggleLevel.bind(this);
-  }
+    this.handlerOnclick = this.handlerOnclick.bind(this);
+    this.handlerOnChange = this.handlerOnChange.bind(this);
 
+      };
+      
+
+    handlerOnclick(chosenAvatar){
+      this.setState({selectedAvatar:chosenAvatar})
+      this.setState({ mountAvatar: !this.state.mountAvatar});
+    }
+
+    handlerOnChange(e){
+      this.setState({playerName:e.target.value})
+
+    }
   toggleRulesMount() {
     this.setState({
       rulesMount: !this.state.rulesMount
@@ -90,6 +151,9 @@ class Home extends React.Component {
           {!this.state.playMount ? null : (
             <GameTable
               // action={this.togglePlayMount}
+              onClick={this.togglePlayMount}
+              playerName={this.state.playerName}
+              avatar={this.state.selectedAvatar}
               playMount={this.state.playMount}
               selectLevel={this.state.isLevelHard}
               selectDeck={this.state.isFullDeck}
@@ -100,6 +164,10 @@ class Home extends React.Component {
         <div>
           {!this.state.settingsMount ? null : (
             <Settings
+             onchange={this.handlerOnChange} 
+            avatarList={this.state.avatarList}
+            mountAvatar={this.state.mountAvatar}
+              onClick={this.handlerOnclick}
               action={this.toggleSettingsMount}
               selectDeck={this.toggleDeckSize}
               selectLevel={this.toggleLevel}

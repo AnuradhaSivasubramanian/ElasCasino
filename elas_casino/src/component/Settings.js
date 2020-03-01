@@ -1,8 +1,11 @@
 import React from "react";
 
 import "./Settings.css";
+import AvatarList from "./AvatarList";
+
 class Settings extends React.Component {
-  render() {
+
+   render() {
     return (
       <section
         className={
@@ -30,9 +33,16 @@ class Settings extends React.Component {
             </div>
           </div>
 
+        <input  onChange={this.props.onchange} type="text"/>
+      <button onClick={this.props.onClick}>Chose Your Avatar </button>
+      {this.props.mountAvatar===true? <AvatarList avatarList={this.props.avatarList} onClick={this.props.onClick }  />
+      :null}    
+
           <button className="pointer" onClick={this.props.action}>
             CLOSE
           </button>
+          
+          
         </div>
       </section>
     );
