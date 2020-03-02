@@ -21,6 +21,7 @@ class GameLogic extends Component {
       WhosTurn: 1,
       flag: 0,
       countCards: 0
+      
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
