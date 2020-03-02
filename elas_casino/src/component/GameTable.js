@@ -12,7 +12,9 @@ function GameTable({ playMount, selectLevel, selectDeck,avatar,playerName,onClic
       <div className="table">
         <GameLogic selectLevel={selectLevel} selectDeck={selectDeck} />
       </div>
+      <div className= "home_btn_container">
       <button onClick={onClick}>Home</button>
+      </div>
       
 
       

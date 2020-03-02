@@ -10,14 +10,15 @@ class Home extends React.Component {
     super(props);
     this.state = {
       rulesMount: false,
-      playMount: false,
+    playMount: true, 
+    // dont forget to return to false playmount 
       settingsMount: false,
       isFullDeck: false,
       isLevelHard: true,
     
       avatarList :[ {
         image:
-          "https://api.adorable.io/avatars/158/abott@ab45t09ytiiip4l8le.io.png",
+          "https://api.adorable.io/avatars/285/https://api.adorable.io/avatars/.png",
         
       },
     
