@@ -19,7 +19,7 @@ class Settings extends React.Component {
           <main className="container_middle">
 
           <div className="toggle_container">
-            <div className="toggle1_div">
+            <div className="toggle_div">
               Half Deck
               <label className="switch">
                 <input type="checkbox" onChange={this.props.selectDeck} />
@@ -27,7 +27,7 @@ class Settings extends React.Component {
               </label>
               Full Deck
             </div>
-            <div className="toggle2_div">
+            <div className="toggle_div">
               Easy Level
               <label className="switch">
                 <input type="checkbox" onChange={this.props.selectLevel} />

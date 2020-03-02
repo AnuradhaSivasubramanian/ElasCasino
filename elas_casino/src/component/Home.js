@@ -17,12 +17,15 @@ class Home extends React.Component {
       avatarList: [
         {
           image:
-            "https://api.adorable.io/avatars/158/abott@ab45t09ytiiip4l8le.io.png"
+            "https://api.adorable.io/avatars/285/abott@adorable.ioE4.png"
         },
-
         {
           image:
-            "https://api.adorable.io/avatars/146/abott@ab45t09ytiiiip4l8le.io.png"
+            "https://api.adorable.io/avatars/285/abott@adorable.io9.png"
+        },
+        {
+          image:
+            "https://api.adorable.io/avatars/285/abott@adorable.iofs3.png"
         },
 
         {
@@ -51,7 +54,8 @@ class Home extends React.Component {
 
         {
           image: "https://api.adorable.io/avatars/285/abott@a5mouth7.io.png"
-        }
+        },
+        {image:"https://api.adorable.io/avatars/285/abott@adorable.kdo54.png"}
       ],
       selectedAvatar:
         "https://api.adorable.io/avatars/139/abott@adorabss899l9oe.io.png",
