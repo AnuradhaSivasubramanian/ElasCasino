@@ -114,10 +114,12 @@ class Home extends React.Component {
   render() {
     return (
       <main className="home_container">
+        <div className="home_text">
         <h1 className="home_container_h1">Ela’s casino</h1>
         <article>
           Are you ready to play Snap?
         </article>
+        </div>
         <div className="buttons_container">
           <button
             className="pointer home_container_button"
@@ -125,17 +127,21 @@ class Home extends React.Component {
           >
             SETTINGS
           </button>
-          <button
-            className="pointer home_container_button"
-            onClick={this.toggleRulesMount}
-          >
-            RULES
-          </button>
+         
           <button
             className="pointer home_container_button"
             onClick={this.togglePlayMount}
+           
           >
             PLAY
+          </button>
+
+          <button
+            className="pointer home_container_button"
+            onClick={this.toggleRulesMount}
+            id="align_flexEnd"
+          >
+            RULES
           </button>
         </div>
 
