@@ -13,7 +13,11 @@ class Settings extends React.Component {
         }
       >
         <div className="settings_div">
+          <section className="container_name">
           <h1>Game Settings</h1>
+          </section>
+          <main className="container_middle">
+
           <div className="toggle_container">
             <div className="toggle1_div">
               Half Deck
@@ -33,15 +37,25 @@ class Settings extends React.Component {
             </div>
           </div>
 
-        <input  onChange={this.props.onchange} type="text"/>
-      <button onClick={this.props.onClick}>Chose Your Avatar </button>
-      {this.props.mountAvatar===true? <AvatarList avatarList={this.props.avatarList} onClick={this.props.onClick }  />
-      :null}    
 
+ <div className="settings_home_row">
+        <figure className="pointer avatar-default">
+      <img src={this.props.selectedAvatar} id="avatar-default"alt="avatar" onClick={this.props.onClick}/>
+      <figurecaption id="avatar-caption">Click to choose your Avatar</figurecaption>
+      </figure>
+      {this.props.mountAvatar===true? <AvatarList avatarList={this.props.avatarList} onClick={this.props.onClick }  />
+      :null}  
+      <div className="input_settings">
+      <label htmlFor="name" > Type your name </label> 
+      <input  onChange={this.props.onchange} type="text" placeholder="John Doe" />
+      </div> 
+</div>
+</main>
+<section className="container_button">
           <button className="pointer" onClick={this.props.action}>
             CLOSE
-          </button>
-          
+          </button> 
+          </section>
           
         </div>
       </section>

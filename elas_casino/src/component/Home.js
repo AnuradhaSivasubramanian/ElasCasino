@@ -4,7 +4,6 @@ import Rules from "./Rules";
 import GameTable from "./GameTable";
 import Settings from "./Settings";
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -14,55 +13,52 @@ class Home extends React.Component {
     // dont forget to return to false playmount 
       settingsMount: false,
       isFullDeck: false,
-      isLevelHard: true,
-    
-      avatarList :[ {
-        image:
-          "https://api.adorable.io/avatars/285/https://api.adorable.io/avatars/.png",
-        
-      },
-    
-      {
-        image:
-          "https://api.adorable.io/avatars/146/abott@ab45t09ytiiiip4l8le.io.png",
-        
-      },
-    
-     
-      {
-        image: "https://api.adorable.io/avatars/285/abott@ab45y4l8lepink.io.png",
-       
-      },
-    
-      {
-        image: "https://api.adorable.io/avatars/285/abott@ab45y4l8leoran.io.png",
-        
-      },
-    
-      {
-        image:
-          "https://api.adorable.io/avatars/285/abott@a5y4l8leor8iro7rmrng36n.io.png",
-        
-      },
-    
-      {
-        image: "https://api.adorable.io/avatars/285/abott@a5irmrng36n.io.png",
-        
-      },
-    
-      {
-        image: "https://api.adorable.io/avatars/285/abott@a51011jokopmin.io.png",
-        
-      },
-    
-      {
-        image: "https://api.adorable.io/avatars/285/abott@a5mouth7.io.png",
-        
-      }],
-        selectedAvatar:"",
-        mountAvatar:false,
-     playerName: "Player 1"
- }
+      isLevelHard: false,
+
+      avatarList: [
+        {
+          image:
+            "https://api.adorable.io/avatars/158/abott@ab45t09ytiiip4l8le.io.png"
+        },
+
+        {
+          image:
+            "https://api.adorable.io/avatars/146/abott@ab45t09ytiiiip4l8le.io.png"
+        },
+
+        {
+          image:
+            "https://api.adorable.io/avatars/285/abott@ab45y4l8lepink.io.png"
+        },
+
+        {
+          image:
+            "https://api.adorable.io/avatars/285/abott@ab45y4l8leoran.io.png"
+        },
+
+        {
+          image:
+            "https://api.adorable.io/avatars/285/abott@a5y4l8leor8iro7rmrng36n.io.png"
+        },
+
+        {
+          image: "https://api.adorable.io/avatars/285/abott@a5irmrng36n.io.png"
+        },
+
+        {
+          image:
+            "https://api.adorable.io/avatars/285/abott@a51011jokopmin.io.png"
+        },
+
+        {
+          image: "https://api.adorable.io/avatars/285/abott@a5mouth7.io.png"
+        }
+      ],
+      selectedAvatar:
+        "https://api.adorable.io/avatars/139/abott@adorabss899l9oe.io.png",
+      mountAvatar: false,
+      playerName: "Player 1"
+    };
 
     this.toggleRulesMount = this.toggleRulesMount.bind(this);
     this.togglePlayMount = this.togglePlayMount.bind(this);
@@ -71,19 +67,16 @@ class Home extends React.Component {
     this.toggleLevel = this.toggleLevel.bind(this);
     this.handlerOnclick = this.handlerOnclick.bind(this);
     this.handlerOnChange = this.handlerOnChange.bind(this);
+  }
 
-      };
-      
+  handlerOnclick(chosenAvatar) {
+    this.setState({ selectedAvatar: chosenAvatar });
+    this.setState({ mountAvatar: !this.state.mountAvatar });
+  }
 
-    handlerOnclick(chosenAvatar){
-      this.setState({selectedAvatar:chosenAvatar})
-      this.setState({ mountAvatar: !this.state.mountAvatar});
-    }
-
-    handlerOnChange(e){
-      this.setState({playerName:e.target.value})
-
-    }
+  handlerOnChange(e) {
+    this.setState({ playerName: e.target.value });
+  }
   toggleRulesMount() {
     this.setState({
       rulesMount: !this.state.rulesMount
@@ -115,10 +108,10 @@ class Home extends React.Component {
   render() {
     return (
       <main className="home_container">
-        <h1 className="home_container_h1">Ela’s casino</h1>
-        <article>
-          Are you ready to play Snap?
-        </article>
+        <div className="home_text">
+          <h1 className="home_container_h1">Ela’s casino</h1>
+          <article>Are you ready to play Snap?</article>
+        </div>
         <div className="buttons_container">
           <button
             className="pointer home_container_button"
@@ -126,17 +119,20 @@ class Home extends React.Component {
           >
             SETTINGS
           </button>
-          <button
-            className="pointer home_container_button"
-            onClick={this.toggleRulesMount}
-          >
-            RULES
-          </button>
+
           <button
             className="pointer home_container_button"
             onClick={this.togglePlayMount}
           >
             PLAY
+          </button>
+
+          <button
+            className="pointer home_container_button"
+            onClick={this.toggleRulesMount}
+            id="align_flexEnd"
+          >
+            RULES
           </button>
         </div>
 
@@ -165,9 +161,10 @@ class Home extends React.Component {
         <div>
           {!this.state.settingsMount ? null : (
             <Settings
-             onchange={this.handlerOnChange} 
-            avatarList={this.state.avatarList}
-            mountAvatar={this.state.mountAvatar}
+              selectedAvatar={this.state.selectedAvatar}
+              onchange={this.handlerOnChange}
+              avatarList={this.state.avatarList}
+              mountAvatar={this.state.mountAvatar}
               onClick={this.handlerOnclick}
               action={this.toggleSettingsMount}
               selectDeck={this.toggleDeckSize}

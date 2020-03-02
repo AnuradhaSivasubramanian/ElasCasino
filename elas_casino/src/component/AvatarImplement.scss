@@ -1,4 +1,4 @@
-.container {
+.container_avatar {
   width: 20%;
   display: flex;
   //margin:0%;
@@ -7,7 +7,7 @@
 }
 
 @media (min-width: 1150px) {
-  .container {
+  .container_avatar {
     margin: 0%;
   }
 }
@@ -16,44 +16,37 @@
   display: flex;
   position: absolute;
   background-image: url("./Photos/Background-game-table.jpeg");
-  /* background-attachment: fixed; */
-  width: 70%;
-  height: 70%;
-  top: 10%;
-  left: 10%;
+  width: 85%;
+  height: 110%;
+  top: -18%;
+  left: 2%;
   border-radius: 30px;
   color: rgba(255, 255, 255, 0.6);
-
   flex-wrap: wrap;
   padding: 5%;
 }
+
 .imgItem {
   width: 85%;
   height: 70%;
-}
-// .avatar_div .divWithImage {
-//   display: flex;
-//   width: 60%;
-//   height: 60%;
-// }
-.avatar_div .avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 60px;
+  border-radius:10%;
   cursor: pointer;
 }
 
-.avatar_div .imgContainer {
-  //flex-flow: row wrap;
-  /*   justify-content: space-around;
-/*  */ //padding: 0;
-  //margin: 0;
+.container_avatar ul {
   list-style: none;
-  /*   align-items: baseline;
- */
-}
+   } 
 
-/*.avatar_div article {
-    width: 40%;
-    margin: 10px 15px;
-  } */
+@media screen and (min-width:1000px){
+  .avatar_div{
+    height:130%;
+    top: -30%;
+    left: 2%;
+  }
+  .imgItem {
+    width: 75%;
+    height: 70%;
+    border-radius:10%;
+    cursor: pointer;
+  }
+}

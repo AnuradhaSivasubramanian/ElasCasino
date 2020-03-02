@@ -8,16 +8,16 @@ const  AvatarImplement  =({key,onClick,obj,unmount}) =>{
 
     return (
       
-      <section className="container"> 
-          <ul className="imgContainer">
-          <li className="imgItem">
+      <section className="container_avatar"> 
+          <ul>
+          <li>
             <img 
             id={key}
             src={obj} 
             onClick={SelectedOb}
             
             
-            alt="avatar" className="avatar" /></li>
+            alt="avatar" className="imgItem" /></li>
           </ul>
       
       </section>
