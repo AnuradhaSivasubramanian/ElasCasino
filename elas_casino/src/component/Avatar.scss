@@ -7,13 +7,23 @@
   top: 5vh;
 }
 .imagem_avatar {
-  width: 7vw;
+  width: 5vw;
   height: 10vh;
   position: relative;
   bottom: 2vh;
-
+  left: 7.5%; //edited
+  border-radius: 10%;
 
 }
+
+@media only screen and (max-width: 1024px) {
+  .imagem_avatar {
+    width: 7vw;
+    left: 5.5%;
+  }
+}
+  
+
 .playerName {
   width: 15vw;
   height: 6vh;
@@ -24,12 +34,20 @@
   text-align: center;
   padding-top:6px;
   padding-bottom:6px;
+  left: -2%;
+  
 
 }
 
+
+
+
+
+
+
 @media only screen and (min-width: 900px) and (max-width: 1050px) {
 .playerName{
-  font-size:1.7em;
+  font-size:1.5em;
   top: -5vh;
   text-align: center;
   padding-top:10px;
@@ -38,10 +56,12 @@
 }
 @media only screen and (min-width: 1050px) {
   .playerName{
-    font-size:1.3em;
+    font-size:1.5em; //edited
     top: -5vh;
+    
     text-align: center;
     padding-top:10px;
     padding-bottom:3px;
   }
 }
+
