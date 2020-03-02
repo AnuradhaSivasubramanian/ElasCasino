@@ -10,9 +10,9 @@ class Home extends React.Component {
     this.state = {
       rulesMount: false,
       playMount: false,
-      settingsMount: true,
+      settingsMount: false,
       isFullDeck: false,
-      isLevelHard: true,
+      isLevelHard: false,
 
       avatarList: [
         {
@@ -53,8 +53,9 @@ class Home extends React.Component {
           image: "https://api.adorable.io/avatars/285/abott@a5mouth7.io.png"
         }
       ],
-      selectedAvatar: "https://api.adorable.io/avatars/139/abott@adorabss899l9oe.io.png",
-      mountAvatar: true,
+      selectedAvatar:
+        "https://api.adorable.io/avatars/139/abott@adorabss899l9oe.io.png",
+      mountAvatar: false,
       playerName: "Player 1"
     };
 
@@ -159,7 +160,7 @@ class Home extends React.Component {
         <div>
           {!this.state.settingsMount ? null : (
             <Settings
-            selectedAvatar={this.state.selectedAvatar}
+              selectedAvatar={this.state.selectedAvatar}
               onchange={this.handlerOnChange}
               avatarList={this.state.avatarList}
               mountAvatar={this.state.mountAvatar}
