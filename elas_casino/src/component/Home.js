@@ -9,8 +9,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       rulesMount: false,
-    playMount: true, 
-    // dont forget to return to false playmount 
+    playMount: false, 
       settingsMount: false,
       isFullDeck: false,
       isLevelHard: false,
