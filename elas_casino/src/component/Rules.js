@@ -7,8 +7,10 @@ class Rules extends React.Component {
         className={this.props.rulesMount ? "rules_section" : "display_none"}
       >
         <div className="rules_div">
+          <section className="rules_h1">
           <h1>Rules</h1>
-          <article>
+          </section>
+          <article className="rules_list">
             <ul>
               <li>Snap is a matching game.</li>
               <li>Your goal is to win all of the cards</li>
@@ -25,12 +27,13 @@ class Rules extends React.Component {
 
               <li>The game can <span class="color_red">only</span>  be played in landscape mode on smart devices or maximized screen on desktops!</li>
 
-              <li></li>
-            </ul>
+                </ul>
           </article>
-          <button className="pointer" onClick={this.props.action}>
+          <section className="button_rules">
+          <button className="pointer " onClick={this.props.action}>
             CLOSE
           </button>
+          </section>
         </div>
       </section>
     );
