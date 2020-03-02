@@ -7,7 +7,7 @@ import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
  import Sounds from "./Sounds";
   let myTimeoutSnapButton = "";
-
+// HEY ANU I AM UPDATED
 class GameLogic extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +21,7 @@ class GameLogic extends Component {
       WhosTurn: 1,
       flag: 0,
       countCards: 0
+      
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);

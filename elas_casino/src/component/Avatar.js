@@ -1,17 +1,17 @@
 import React from "react";
 import "./Avatar.scss";
 
-class Avatar extends React.Component {
-  render() {
+function Avatar({avatar,playerName}) {
+
     return (
       <section>
         <div className="avatar_Display">
           <img
-            src="https://cdn.onlinewebfonts.com/svg/img_181369.png"
-            alt=""
+            src={avatar? avatar:"https://cdn.onlinewebfonts.com/svg/img_181369.png"}
+            alt="avatar"
             className="imagem_avatar"
           />
-          <p className="playerName"> Player 1</p>
+          <p className="playerName"> {playerName}</p>
           <img
             src="https://cdn.onlinewebfonts.com/svg/img_181369.png"
             alt=""
@@ -21,7 +21,7 @@ class Avatar extends React.Component {
         </div>
       </section>
     );
-  }
+  
 }
 
 export default Avatar;
