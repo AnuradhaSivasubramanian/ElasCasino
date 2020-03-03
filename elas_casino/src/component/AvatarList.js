@@ -1,6 +1,6 @@
 import React from "react";
 import AvatarImplement from "./AvatarImplement";
-import "./AvatarImplement.scss";
+import "./scss/AvatarImplement.scss";
 
 
 const AvatarList = ({avatarList,onClick}) => {

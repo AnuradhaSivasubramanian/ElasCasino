@@ -1,6 +1,6 @@
 import React from "react";
 import Home from "./component/Home";
-import "./App.scss"
+import "./component/scss/App.scss"
 import TurnYourPhone from "./component/TurnYourPhone"
 
 

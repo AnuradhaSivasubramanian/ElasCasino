@@ -1,7 +1,7 @@
 import React  from "react";
 import GameLogic from "./GameLogic";
 import Avatar from "./Avatar";
-import "./GameTable.scss";
+import "./scss/GameTable.scss";
 
 function GameTable({ playMount, selectLevel, selectDeck,avatar,playerName,onClick}) {
 

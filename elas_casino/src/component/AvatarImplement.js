@@ -1,5 +1,5 @@
 import React from "react";
-import "./AvatarImplement.scss";
+import "./scss/AvatarImplement.scss";
 
 const  AvatarImplement  =({key,onClick,obj,unmount}) =>{
  const SelectedOb=()=>{

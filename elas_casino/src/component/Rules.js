@@ -1,5 +1,5 @@
 import React from "react";
-import "./Rules.css";
+import "./scss/Rules.scss";
 class Rules extends React.Component {
   render() {
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import "./scss/Home.scss";
 import Rules from "./Rules";
 import GameTable from "./GameTable";
 import Settings from "./Settings";

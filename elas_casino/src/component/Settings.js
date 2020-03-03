@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Settings.css";
+import "./scss/Settings.scss";
 import AvatarList from "./AvatarList";
 
 class Settings extends React.Component {

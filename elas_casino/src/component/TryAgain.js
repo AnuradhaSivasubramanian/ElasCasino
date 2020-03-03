@@ -1,5 +1,5 @@
 import React from 'react'
-import "./TryAgain.scss"
+import "./scss/TryAgain.scss"
 function TryAgain (){
     return(
         <section className="blur">
