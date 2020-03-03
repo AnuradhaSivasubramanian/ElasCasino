@@ -7,7 +7,7 @@ import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
 import Sounds from "./Sounds";
 let myTimeoutSnapButton = "";
-
+// HEY ANU I AM UPDATED
 class GameLogic extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +29,7 @@ class GameLogic extends Component {
     this.mustSnap_2 = this.mustSnap_2.bind(this);
     this.isNoWinner = this.isNoWinner.bind(this);
     this.fullDeck = this.fullDeck.bind(this);
+    this.resultUnmount = this.resultUnmount.bind(this);
   }
   componentDidMount() {
     this.fullDeck();
@@ -36,12 +37,25 @@ class GameLogic extends Component {
 
   fullDeck() {
     if (this.props.selectDeck === true) {
-      this.setState({ deck_id: "hd8bdiq23g4m" });
+      this.setState({ deck_id: "1zbmzpx5yxvt" });
       this.setState({ countCards: 26 });
     } else {
       this.setState({ deck_id: "5eb1ajr3aoxt" });
       this.setState({ countCards: 13 });
     }
+  }
+  resultUnmount() {
+    this.setState({
+      player_1_remaining: "",
+      player_2_remaining: "",
+      player1: [],
+      player2: [],
+      dumppile: "",
+      WhosTurn: 1,
+      flag: 0
+    });
+
+    
   }
 
   drawOnClick() {
@@ -49,7 +63,7 @@ class GameLogic extends Component {
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
       .then(data => {
-        console.log(data.remaining);
+        
         this.setState({ flag: 0 });
         this.drawCardsForPlayer("player_1");
         this.drawCardsForPlayer("player_2");
@@ -57,13 +71,11 @@ class GameLogic extends Component {
       .catch(error => console.error(`something went wrong: ${error}`));
 
     if (this.props.selectLevel) {
-      setTimeout(this.drawPlayer_1, 3000);
-      console.log(this.props.selectLevel);
-      console.log("easy");
+      setTimeout(this.drawPlayer_1, 1200);
+      
     } else {
-      setTimeout(this.drawPlayer_1, 600);
-      console.log("hard");
-      console.log(this.props.selectLevel);
+      setTimeout(this.drawPlayer_1, 800);
+      
     }
   }
 
@@ -92,6 +104,7 @@ class GameLogic extends Component {
         if (pilename === "player_1") {
           this.setState({ player_1_remaining: data.piles.player_1.remaining });
         }
+
         if (pilename === "player_2") {
           this.setState({
             player_1_remaining: data.piles.player_1.remaining,
@@ -116,9 +129,9 @@ class GameLogic extends Component {
 
       if (this.state.player_2_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_2, 3000);
+          setTimeout(this.drawPlayer_2, 1200);
         } else {
-          setTimeout(this.drawPlayer_2, 600);
+          setTimeout(this.drawPlayer_2, 800);
         }
       }
     }
@@ -130,21 +143,20 @@ class GameLogic extends Component {
 
       if (this.state.player_1_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_1, 3000);
+          setTimeout(this.drawPlayer_1, 1200);
         } else {
-          setTimeout(this.drawPlayer_1, 600);
+          setTimeout(this.drawPlayer_1, 800);
         }
       }
     }
     if (
       this.state.player1.value === this.state.player2.value &&
-      this.state.dumppile !== 0 &&
       (this.state.player_1_remaining !== 0 ||
         this.state.player_2_remaining !== 0)
     ) {
       myTimeoutSnapButton = setTimeout(
         this.mustSnap_2,
-        (Math.floor(Math.random() * 9) + 1) * 500
+        (Math.floor(Math.random() * 9) + 1) * 1000
       );
     }
   }
@@ -185,7 +197,7 @@ class GameLogic extends Component {
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
     ) {
-      console.log("I am inside if");
+      
       this.dumpPileToPlayer("player_1", 1);
       this.setState({ player2: [] });
     } else {
@@ -200,6 +212,7 @@ class GameLogic extends Component {
     this.dumpPileToPlayer("player_2", 2);
     this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
+    
   }
   dumpPileToPlayer(pilename, flagValue) {
     let listOfDumppile = [];
@@ -276,12 +289,13 @@ class GameLogic extends Component {
           />
           <Buttons nameClass="snapButton" buttonName="SNAP" />
         </div>
-
         {this.state.flag === 3 ? <TryAgain /> : null}
         {this.state.flag === 4 || this.state.flag === 5 ? (
-          <DisplayResult result={this.state.flag} />
+          <DisplayResult
+            result={this.state.flag}
+            actiondisplay={this.resultUnmount}
+          />
         ) : null}
-
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"

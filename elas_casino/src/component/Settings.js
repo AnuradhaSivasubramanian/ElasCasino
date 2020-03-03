@@ -1,8 +1,11 @@
 import React from "react";
 
-import "./Settings.css";
+import "./scss/Settings.scss";
+import AvatarList from "./AvatarList";
+
 class Settings extends React.Component {
-  render() {
+
+   render() {
     return (
       <section
         className={
@@ -10,9 +13,13 @@ class Settings extends React.Component {
         }
       >
         <div className="settings_div">
+          <section className="container_name">
           <h1>Game Settings</h1>
+          </section>
+          <main className="container_middle">
+
           <div className="toggle_container">
-            <div className="toggle1_div">
+            <div className="toggle_div">
               Half Deck
               <label className="switch">
                 <input type="checkbox" onChange={this.props.selectDeck} />
@@ -20,7 +27,7 @@ class Settings extends React.Component {
               </label>
               Full Deck
             </div>
-            <div className="toggle2_div">
+            <div className="toggle_div">
               Easy Level
               <label className="switch">
                 <input type="checkbox" onChange={this.props.selectLevel} />
@@ -30,9 +37,26 @@ class Settings extends React.Component {
             </div>
           </div>
 
+
+ <div className="settings_home_row">
+        <figure className="pointer avatar-default">
+      <img src={this.props.selectedAvatar} id="avatar-default"alt="avatar" onClick={this.props.onClick}/>
+      <figcaption id="avatar-caption">Click to choose your Avatar</figcaption>
+      </figure>
+      {this.props.mountAvatar===true? <AvatarList avatarList={this.props.avatarList} onClick={this.props.onClick }  />
+      :null}  
+      <div className="input_settings">
+      <label htmlFor="name" > Type your name </label> 
+      <input  onChange={this.props.onchange} type="text" placeholder="John Doe" />
+      </div> 
+</div>
+</main>
+<section className="container_button">
           <button className="pointer" onClick={this.props.action}>
             CLOSE
-          </button>
+          </button> 
+          </section>
+          
         </div>
       </section>
     );

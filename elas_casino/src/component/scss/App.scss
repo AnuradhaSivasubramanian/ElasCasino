@@ -1,0 +1,69 @@
+@media screen and (orientation: portrait) {
+  #orientation {
+    display: none;
+  }
+  #use-landscape{
+      display:block;  }
+      body{
+        background: black;
+        
+        }
+        .turnBody{
+            width:100%;
+            height:100%;
+            display:flex;
+           
+        }
+        
+        #phonegif{
+            position: absolute;
+            width:100%;
+            height:70%;
+            margin-top: 15%;
+        }
+        
+        #turnphone_h1{
+            color:rgba(255, 255, 255, 0.589);
+            font-size:2em;
+            position: absolute;
+            width:100%;
+            height:100%;
+        top:70%;
+        left:10%;
+        }
+}
+
+@media screen  and (max-width:550px) {
+  #orientation {
+    display: none;
+  }
+  #use-landscape{
+      display:block;  }
+      body{
+        background: black;
+        
+        }
+        .turnBody{
+            width:100%;
+            height:100%;
+            display:flex;
+           
+        }
+        
+        #phonegif{
+            position: absolute;
+            width:100%;
+            height:70%;
+            margin-top: 15%;
+        }
+        
+        #turnphone_h1{
+            color:rgba(255, 255, 255, 0.589);
+            font-size:2em;
+            position: absolute;
+            width:100%;
+            height:100%;
+        top:70%;
+        left:10%;
+        }
+}

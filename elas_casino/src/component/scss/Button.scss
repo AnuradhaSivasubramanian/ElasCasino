@@ -1,16 +1,18 @@
 //PRECISA ORGANIZAR
+
+
 button {
-  font-family: Arapey;
+  font-family: "Arapey";
   font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
+  font-weight: 500;
+  font-size:105%;
   align-content: center;
-  color: #d4ffebe7;
+  color: #f1faf6e7;
   width: 15vw;
   height: 8vh;
-  background: #404040;
+  background: #000000d3;
   border: none;
-  box-shadow: -7px -3px 6px rgba(0, 0, 0, 0.7);
+  box-shadow: -10px 7px 10px rgba(5, 5, 5, 0.7);
   border-radius: 10px;
   cursor: pointer;
 }

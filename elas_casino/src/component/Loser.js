@@ -27,7 +27,7 @@ class Loser extends Component {
 
   unmount() {
     this.setState({ flag: true });
-    console.log(this.state.flag);
+    
   }
 
   render() {

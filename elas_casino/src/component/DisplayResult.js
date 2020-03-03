@@ -8,10 +8,8 @@ class DisplayResult extends Component {
     super(props);
     this.state = {
       WinnerOrCry: "",
-      displayImage: "",
-      flag: false
+      displayImage: ""
     };
-    this.unmount = this.unmount.bind(this);
   }
   componentDidMount() {
     this.decidetheWinner();
@@ -21,7 +19,7 @@ class DisplayResult extends Component {
     if (this.props.result === 5) {
       const status = "cry";
       this.APIWinnerOrLoser(status);
-    } else {
+    } else if (this.props.result === 4) {
       const status = "Claps";
       this.APIWinnerOrLoser(status);
       this.setState({ WinnerOrCry: "Winner" });
@@ -29,27 +27,30 @@ class DisplayResult extends Component {
   }
 
   APIWinnerOrLoser(status) {
-    Axios.get(
-      `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${status}&rating=G
-            `
-    ).then(response => {
-      console.log(response.data);
-      this.setState({ displayImage: response.data.data.images.original.url });
-    });
+    if (this.props.result === 5 || this.props.result === 4) {
+      Axios.get(
+        `https://api.giphy.com/v1/gifs/random?api_key=Ja5BUp5RkITwVfo5PIjYLrtoNWHb1lVp&tag=${status}&rating=G
+          `
+      )
+        .then(response => {
+          if (this.props.result === 5 || this.props.result === 4) {
+            
+            this.setState({
+              displayImage: response.data.data.images.original.url
+            });
+          }
+        })
+        .catch(error => console.error(`something went wrong: ${error}`));
+    }
   }
 
-  unmount() {
-    this.setState({ flag: true });
-  }
   componentWillUnmount() {
-    if ( this.state.flag === true){
-      console.log("component unmount")
-    }
+    this.props.actiondisplay();
   }
 
   render() {
     return (
-      <section className={this.state.flag === false ? "blur" : "display_none "}>
+      <section className="blur">
         <div className="display_flex">
           <img
             src={this.state.displayImage}
@@ -59,7 +60,7 @@ class DisplayResult extends Component {
           <div className="display_block">
             <GiveTheResult WinnerOrCry={this.state.WinnerOrCry} />
           </div>
-          <button onClick={this.unmount} className="winner_button">
+          <button onClick={this.props.actiondisplay} className="winner_button">
             Close
           </button>
         </div>

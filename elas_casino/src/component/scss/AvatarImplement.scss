@@ -1,0 +1,52 @@
+.container_avatar {
+  width: 20%;
+  display: flex;
+  //margin:0%;
+
+  //left: 20%;
+}
+
+@media (min-width: 1150px) {
+  .container_avatar {
+    margin: 0%;
+  }
+}
+
+.avatar_div {
+  display: flex;
+  position: absolute;
+  background: url("../Photos/Background-game-table.jpeg");
+  width: 85%;
+  height: 110%;
+  top: -18%;
+  left: 2%;
+  border-radius: 30px;
+  color: rgba(255, 255, 255, 0.6);
+  flex-wrap: wrap;
+  padding: 5%;
+}
+
+.imgItem {
+  width: 85%;
+  height: 70%;
+  border-radius:10%;
+  cursor: pointer;
+}
+
+.container_avatar ul {
+  list-style: none;
+   } 
+
+@media screen and (min-width:1000px){
+  .avatar_div{
+    height:130%;
+    top: -30%;
+    left: 2%;
+  }
+  .imgItem {
+    width: 75%;
+    height: 70%;
+    border-radius:10%;
+    cursor: pointer;
+  }
+}
