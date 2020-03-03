@@ -7,8 +7,8 @@
   top: 5vh;
 }
 .imagem_avatar {
-  width: 5vw;
-  height: 10vh;
+  width: 40%;
+  height: 40%;
   position: relative;
   bottom: 2vh;
   left: 7.5%; //edited
@@ -55,6 +55,10 @@
 }
 }
 @media only screen and (min-width: 1050px) {
+  .imagem_avatar{
+    width: 10%;
+    height:10%;
+  }
   .playerName{
     font-size:1.5em; //edited
     top: -5vh;

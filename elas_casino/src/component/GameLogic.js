@@ -5,8 +5,8 @@ import TryAgain from "./TryAgain";
 import Pile from "./Pile";
 import DisplayResult from "./DisplayResult";
 import Buttons from "./Buttons";
- import Sounds from "./Sounds";
-  let myTimeoutSnapButton = "";
+import Sounds from "./Sounds";
+let myTimeoutSnapButton = "";
 // HEY ANU I AM UPDATED
 class GameLogic extends Component {
   constructor(props) {
@@ -21,7 +21,6 @@ class GameLogic extends Component {
       WhosTurn: 1,
       flag: 0,
       countCards: 0
-      
     };
     this.drawOnClick = this.drawOnClick.bind(this);
     this.drawPlayer_1 = this.drawPlayer_1.bind(this);
@@ -47,13 +46,6 @@ class GameLogic extends Component {
   }
   resultUnmount() {
     this.setState({
-      flag: 0
-    });
-    console.log("set flag to 0");
-  }
-
-  drawOnClick() {
-    this.setState({
       player_1_remaining: "",
       player_2_remaining: "",
       player1: [],
@@ -62,6 +54,11 @@ class GameLogic extends Component {
       WhosTurn: 1,
       flag: 0
     });
+
+    console.log("set flag to 0");
+  }
+
+  drawOnClick() {
     axios
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
@@ -74,11 +71,11 @@ class GameLogic extends Component {
       .catch(error => console.error(`something went wrong: ${error}`));
 
     if (this.props.selectLevel) {
-      setTimeout(this.drawPlayer_1, 3000);
+      setTimeout(this.drawPlayer_1, 1200);
       console.log(this.props.selectLevel);
       console.log("easy");
     } else {
-      setTimeout(this.drawPlayer_1, 1000);
+      setTimeout(this.drawPlayer_1, 800);
       console.log("hard");
       console.log(this.props.selectLevel);
     }
@@ -134,9 +131,9 @@ class GameLogic extends Component {
 
       if (this.state.player_2_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_2, 3000);
+          setTimeout(this.drawPlayer_2, 1200);
         } else {
-          setTimeout(this.drawPlayer_2, 1000);
+          setTimeout(this.drawPlayer_2, 800);
         }
       }
     }
@@ -148,15 +145,14 @@ class GameLogic extends Component {
 
       if (this.state.player_1_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_1, 3000);
+          setTimeout(this.drawPlayer_1, 1200);
         } else {
-          setTimeout(this.drawPlayer_1, 1000);
+          setTimeout(this.drawPlayer_1, 800);
         }
       }
     }
     if (
-      this.state.player1.value === this.state.player2.value 
-        &&
+      this.state.player1.value === this.state.player2.value &&
       (this.state.player_1_remaining !== 0 ||
         this.state.player_2_remaining !== 0)
     ) {
@@ -165,8 +161,6 @@ class GameLogic extends Component {
         (Math.floor(Math.random() * 9) + 1) * 1000
       );
     }
-
-  
   }
 
   drawACardForPlayer(pilename, noOfCards) {
@@ -200,8 +194,7 @@ class GameLogic extends Component {
     clearTimeout(myTimeoutSnapButton);
 
     if (
-      this.state.player1.value === this.state.player2.value 
-    &&
+      this.state.player1.value === this.state.player2.value &&
       this.state.dumppile !== 0 &&
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
@@ -250,7 +243,7 @@ class GameLogic extends Component {
   render() {
     return (
       <section>
-           <Sounds soundValue={this.state.flag} />
+        <Sounds soundValue={this.state.flag} />
         <div className="cards_container">
           <div className="player_1_container">
             <Pile
