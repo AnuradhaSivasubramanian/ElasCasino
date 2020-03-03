@@ -55,7 +55,7 @@ class GameLogic extends Component {
       flag: 0
     });
 
-    console.log("set flag to 0");
+    
   }
 
   drawOnClick() {
@@ -63,7 +63,7 @@ class GameLogic extends Component {
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
       .then(data => {
-        console.log(data.remaining);
+        
         this.setState({ flag: 0 });
         this.drawCardsForPlayer("player_1");
         this.drawCardsForPlayer("player_2");
@@ -72,12 +72,10 @@ class GameLogic extends Component {
 
     if (this.props.selectLevel) {
       setTimeout(this.drawPlayer_1, 1200);
-      console.log(this.props.selectLevel);
-      console.log("easy");
+      
     } else {
       setTimeout(this.drawPlayer_1, 800);
-      console.log("hard");
-      console.log(this.props.selectLevel);
+      
     }
   }
 
@@ -199,7 +197,7 @@ class GameLogic extends Component {
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
     ) {
-      console.log("I am inside if");
+      
       this.dumpPileToPlayer("player_1", 1);
       this.setState({ player2: [] });
     } else {
@@ -214,7 +212,7 @@ class GameLogic extends Component {
     this.dumpPileToPlayer("player_2", 2);
     this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
-    console.log("computer snap");
+    
   }
   dumpPileToPlayer(pilename, flagValue) {
     let listOfDumppile = [];
