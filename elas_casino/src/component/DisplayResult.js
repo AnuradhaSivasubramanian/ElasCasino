@@ -34,7 +34,7 @@ class DisplayResult extends Component {
       )
         .then(response => {
           if (this.props.result === 5 || this.props.result === 4) {
-            console.log(response.data);
+            
             this.setState({
               displayImage: response.data.data.images.original.url
             });
