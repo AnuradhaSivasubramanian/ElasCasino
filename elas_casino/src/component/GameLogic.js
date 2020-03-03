@@ -74,11 +74,11 @@ class GameLogic extends Component {
       .catch(error => console.error(`something went wrong: ${error}`));
 
     if (this.props.selectLevel) {
-      setTimeout(this.drawPlayer_1, 3000);
+      setTimeout(this.drawPlayer_1, 1200);
       console.log(this.props.selectLevel);
       console.log("easy");
     } else {
-      setTimeout(this.drawPlayer_1, 1000);
+      setTimeout(this.drawPlayer_1, 800);
       console.log("hard");
       console.log(this.props.selectLevel);
     }
@@ -134,9 +134,9 @@ class GameLogic extends Component {
 
       if (this.state.player_2_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_2, 3000);
+          setTimeout(this.drawPlayer_2, 1200);
         } else {
-          setTimeout(this.drawPlayer_2, 1000);
+          setTimeout(this.drawPlayer_2, 800);
         }
       }
     }
@@ -148,9 +148,9 @@ class GameLogic extends Component {
 
       if (this.state.player_1_remaining !== 0) {
         if (this.props.selectLevel) {
-          setTimeout(this.drawPlayer_1, 3000);
+          setTimeout(this.drawPlayer_1, 1200);
         } else {
-          setTimeout(this.drawPlayer_1, 1000);
+          setTimeout(this.drawPlayer_1, 800);
         }
       }
     }

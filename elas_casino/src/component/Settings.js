@@ -41,7 +41,7 @@ class Settings extends React.Component {
  <div className="settings_home_row">
         <figure className="pointer avatar-default">
       <img src={this.props.selectedAvatar} id="avatar-default"alt="avatar" onClick={this.props.onClick}/>
-      <figurecaption id="avatar-caption">Click to choose your Avatar</figurecaption>
+      <figcaption id="avatar-caption">Click to choose your Avatar</figcaption>
       </figure>
       {this.props.mountAvatar===true? <AvatarList avatarList={this.props.avatarList} onClick={this.props.onClick }  />
       :null}  
