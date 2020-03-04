@@ -1,4 +1,5 @@
 import React from 'react'
+import "./scss/App.scss"
 import TurnPhone from "./Photos/turn_your_phone.gif"
 
 function TurnYourPhone(){
