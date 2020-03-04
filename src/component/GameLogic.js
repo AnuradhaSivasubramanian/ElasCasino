@@ -297,12 +297,16 @@ class GameLogic extends Component {
           <Buttons nameClass="snapButton" buttonName="SNAP" />
         </div>
         {this.state.flag === 3 ? <TryAgain /> : null}
+        
+        
         {this.state.flag === 4 || this.state.flag === 5 ? (
-          <DisplayResult
+        
+   
+        <DisplayResult
             result={this.state.flag}
             actiondisplay={this.resultUnmount}
-          />
-        ) : null}
+          /> 
+        ) : null} 
         <Buttons
           onclick={this.drawOnClick}
           nameClass="StartButton"
