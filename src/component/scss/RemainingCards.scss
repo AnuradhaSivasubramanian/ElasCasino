@@ -33,7 +33,11 @@ p {
   font-size: 1.2em;
   text-align: center;
 }
-
+@media screen and (min-width:500px) and (max-width:600px){
+  p{
+    font-size:0.8em;
+  }
+}
 @media only screen and (min-width: 900px) and (max-width: 1050px) {
   .remaining_player1 {
     font-size: 2em;
