@@ -37,11 +37,25 @@ class GameLogic extends Component {
 
   fullDeck() {
     if (this.props.selectDeck === true) {
-      this.setState({ deck_id: "1zbmzpx5yxvt" });
-      this.setState({ countCards: 26 });
+      axios
+        .get(`https://deckofcardsapi.com/api/deck/new/`)
+        .then(response => response.data)
+        .then(data => {
+          this.setState({ deck_id: data.deck_id });
+          this.setState({ countCards: 26 });
+        })
+        .catch(error => console.error(`something went wrong: ${error}`));
     } else {
-      this.setState({ deck_id: "5eb1ajr3aoxt" });
-      this.setState({ countCards: 13 });
+      axios
+        .get(
+          `https://deckofcardsapi.com/api/deck/new/?cards=AS,2S,KS,AD,2D,KD,AC,2C,KC,AH,2H,KH,QC,QS,QH,QD,JC,JS,JD,JH,3C,3D,3S,3H,4H,4D`
+        )
+        .then(response => response.data)
+        .then(data => {
+          this.setState({ deck_id: data.deck_id });
+          this.setState({ countCards: 13 });
+        })
+        .catch(error => console.error(`something went wrong: ${error}`));
     }
   }
   resultUnmount() {
@@ -54,8 +68,6 @@ class GameLogic extends Component {
       WhosTurn: 1,
       flag: 0
     });
-
-    
   }
 
   drawOnClick() {
@@ -63,7 +75,6 @@ class GameLogic extends Component {
       .get(`https://deckofcardsapi.com/api/deck/${this.state.deck_id}/shuffle/`)
       .then(response => response.data)
       .then(data => {
-        
         this.setState({ flag: 0 });
         this.drawCardsForPlayer("player_1");
         this.drawCardsForPlayer("player_2");
@@ -72,10 +83,8 @@ class GameLogic extends Component {
 
     if (this.props.selectLevel) {
       setTimeout(this.drawPlayer_1, 1200);
-      
     } else {
       setTimeout(this.drawPlayer_1, 800);
-      
     }
   }
 
@@ -197,7 +206,6 @@ class GameLogic extends Component {
       this.state.WhosTurn === 1 &&
       this.state.player_1_remaining > 0
     ) {
-      
       this.dumpPileToPlayer("player_1", 1);
       this.setState({ player2: [] });
     } else {
@@ -212,7 +220,6 @@ class GameLogic extends Component {
     this.dumpPileToPlayer("player_2", 2);
     this.setState({ player1: [] });
     this.setState({ WhosTurn: 1 });
-    
   }
   dumpPileToPlayer(pilename, flagValue) {
     let listOfDumppile = [];
